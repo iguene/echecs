@@ -4,10 +4,11 @@
 #include "adversaire.h"
 #include "arbitre.h"
 #include "echecmat.h"
+#include "joueur2.h"
 
 int sortieecheccavalier(int tab[][8], int copietab[][8], int n, int m)
 {
-    int v, i, j; //desolé flemme de changer nom variable du pavé
+    int v, i, j; //desolÃ© flemme de changer nom variable du pavÃ©
     i = n;
     j = m;
     if(n+2 < 8 && m-1 >= 0)
@@ -17,7 +18,7 @@ int sortieecheccavalier(int tab[][8], int copietab[][8], int n, int m)
             copietab[i][j] = 0;
             copietab[i+2][j-1] = 4;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -31,7 +32,7 @@ int sortieecheccavalier(int tab[][8], int copietab[][8], int n, int m)
             copietab[i][j] = 0;
             copietab[i+2][j+1] = 4;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -45,7 +46,7 @@ int sortieecheccavalier(int tab[][8], int copietab[][8], int n, int m)
             copietab[i][j] = 0;
             copietab[i-2][j-1] = 4;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -59,7 +60,7 @@ int sortieecheccavalier(int tab[][8], int copietab[][8], int n, int m)
             copietab[i][j] = 0;
             copietab[i-2][j+1] = 4;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -73,7 +74,7 @@ int sortieecheccavalier(int tab[][8], int copietab[][8], int n, int m)
             copietab[i][j] = 0;
             copietab[i-1][j+2] = 4;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -87,7 +88,7 @@ int sortieecheccavalier(int tab[][8], int copietab[][8], int n, int m)
             copietab[i][j] = 0;
             copietab[i+1][j+2] = 4;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -101,7 +102,7 @@ int sortieecheccavalier(int tab[][8], int copietab[][8], int n, int m)
             copietab[i][j] = 0;
             copietab[i-1][j-2] = 4;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -115,7 +116,7 @@ int sortieecheccavalier(int tab[][8], int copietab[][8], int n, int m)
             copietab[i][j] = 0;
             copietab[i+1][j-2] = 4;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -134,7 +135,7 @@ int sortieechecreine(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i][j+b] = 10;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -147,7 +148,7 @@ int sortieechecreine(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i][j-b] = 10;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -160,7 +161,7 @@ int sortieechecreine(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i+b][j] = 10;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -173,7 +174,7 @@ int sortieechecreine(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i-b][j] = 10;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -186,7 +187,7 @@ int sortieechecreine(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i][j+b] = 10;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -199,7 +200,7 @@ int sortieechecreine(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i][j-b] = 10;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -212,7 +213,7 @@ int sortieechecreine(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i+b][j] = 10;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -225,7 +226,7 @@ int sortieechecreine(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i-b][j] = 10;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -245,7 +246,7 @@ int sortieechectour(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i][j+b] = 5;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -258,7 +259,7 @@ int sortieechectour(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i][j-b] = 5;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -271,7 +272,7 @@ int sortieechectour(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i+b][j] = 5;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -284,7 +285,7 @@ int sortieechectour(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i-b][j] = 5;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -305,7 +306,7 @@ int sortieechecfou(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i+b][j+b] = 3;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -318,7 +319,7 @@ int sortieechecfou(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i+b][j-b] = 3;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -331,7 +332,7 @@ int sortieechecfou(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i-b][j+b] = 3;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -344,7 +345,7 @@ int sortieechecfou(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i-b][j-b] = 3;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -365,7 +366,7 @@ int sortieechecpion(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i-2][j] = 1;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
@@ -377,34 +378,34 @@ int sortieechecpion(int tab[][8], int copietab[][8], int i, int j)
         copietab[i][j] = 0;
         copietab[i-1][j] = 1;
         v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
         {
             return 1; //couppossible = 1
         }
         recopietab(tab, copietab);
     }
-    if(j+1 < 8)
+    if(j+1 < 8 && i-1 >=0)
     {
         if(tab[i-1][j+1] < 0)
         {
             copietab[i][j] = 0;
             copietab[i-1][j+1] = 1;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
             recopietab(tab, copietab);
         }
     }
-    if(j-1 >= 0)
+    if(j-1 >= 0 && i-1 >= 0)
     {
         if(tab[i-1][j-1] < 0)
         {
             copietab[i][j] = 0;
             copietab[i-1][j-1] = 1;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -425,7 +426,7 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
             copietab[i][j] = 0;
             copietab[i+1][j+1] = 19;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -439,7 +440,7 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
             copietab[i][j] = 0;
             copietab[i-1][j-1] = 19;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -453,7 +454,7 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
             copietab[i][j] = 0;
             copietab[i+1][j-1] = 19;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -467,7 +468,7 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
             copietab[i][j] = 0;
             copietab[i-1][j+1] = 19;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -481,7 +482,7 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
             copietab[i][j] = 0;
             copietab[i][j+1] = 19;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -495,7 +496,7 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
             copietab[i][j] = 0;
             copietab[i+1][j] = 19;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -509,7 +510,7 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
             copietab[i][j] = 0;
             copietab[i-1][j] = 19;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -523,7 +524,7 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
             copietab[i][j] = 0;
             copietab[i][j-1] = 19;
             v = verifechec(copietab);
-            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas Ãªtre echec et mat
             {
                 return 1; //couppossible = 1
             }
@@ -594,3 +595,4 @@ int verifechecetmat(int tab[][8])
 
     return 0; // echec et mat
 }
+
