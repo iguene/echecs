@@ -1,6 +1,9 @@
 #ifndef JOUEUR_H_INCLUDED
 #define JOUEUR_H_INCLUDED
 
+//choix mode
+void queladversaire();
+
 //affichage pour joueur
 void quelpiecechoisi(int tab[][8], int li, int ci);
 
@@ -13,7 +16,10 @@ int deplacementfou(int tab[][8], int li, int ci, int ld, int cd);
 int deplacementpion(int tab[][8], int li, int ci, int ld, int cd);
 int checkpiece(int tab[][8], int li, int ci, int ld, int cd);
 
+
 //pseudo game boucle (on y revient pour chaque attente avec le joueur)
+void tourjoueurechec(int tab[][8], int a);
 void tourjoueur(int tab[][8]);
 
 #endif // JOUEUR_H_INCLUDED
+
