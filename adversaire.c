@@ -6,9 +6,8 @@
 #include "arbitre.h"
 #include "echecmat.h"
 #include "joueur2.h"
-
-
-//tente de réunir les conditions du minimax : faut faire une listes de tout les coups possible pour chaque joueur sur plusieurs profondeurs
+/*
+//tente de rÃ©unir les conditions du minimax : faut faire une listes de tout les coups possible pour chaque joueur sur plusieurs profondeurs
 
 typedef struct coup
 {
@@ -42,8 +41,14 @@ coup *ajoutefrere(coup *ainee, coup *cadet)
     ainee = ajoutefrere(ainee->frere, cadet);
     return ainee;
 }
+*/
+/*
+coup creationlistecoup(int tab[][8], int tour) //si tour == 0 alors liste des coups du joueur sinon liste de l'ia
+{
 
-
+}
+*/
+/*
 
 int eval(int tab[][8])
 {
@@ -53,7 +58,7 @@ int eval(int tab[][8])
     {
         for(j = 0; j < 8; j++)
         {
-            if(tab[i][j] == 4) // pour mettre la valeur des cavaliers à égal à celle des fous comme elle devrait l'être mais comment dans le tableau faut différencier...
+            if(tab[i][j] == 4) // pour mettre la valeur des cavaliers Ã  Ã©gal Ã  celle des fous comme elle devrait l'Ãªtre mais comment dans le tableau faut diffÃ©rencier...
             {
                 valeur = 3;
             } else if (tab[i][j] == -4)
@@ -70,4 +75,9 @@ int eval(int tab[][8])
 
     return note;
 }
+*/
 
+void tourIA(int tab[][8])
+{
+
+}
