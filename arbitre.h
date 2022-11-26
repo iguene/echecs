@@ -15,5 +15,14 @@ int veriffouechec(int tab[][8], int n, int m);
 int verifreineechec(int tab[][8], int i, int j);
 int verifechec(int tab[][8]);
 
+int verifpionechecnoir(int tab[][8], int n, int m);
+int verifcavalierechecnoir(int tab[][8], int n, int m);
+int veriftourechecnoir(int tab[][8], int n, int m);
+int veriffouechecnoir(int tab[][8], int n, int m);
+int verifreineechecnoir(int tab[][8], int i, int j);
+int verifechecnoir(int tab[][8]);
+
+
 
 #endif // ARBITRE_H_INCLUDED
+
