@@ -6,6 +6,25 @@
 #include "echecmat.h"
 #include "joueur2.h"
 
+int choix = 1;
+
+void queladversaire()
+{
+    printf(" \n\n Entrez 1 pour affronter une IA ou 2 pour affronter un joueur 2 : ");
+    scanf("%d", &choix);
+
+    if(choix == 1)
+    {
+        printf("\n\n Match contre l'IA \n\n");
+    } else if(choix == 2)
+    {
+        printf("\n\n Match entre joueur 1 et joueur 2 \n\n");
+    } else
+    {
+        queladversaire();
+    }
+}
+
 void quelpiecechoisi(int tab[][8], int li, int ci)
 {
     if(tab[li][ci] == 1)
@@ -59,7 +78,7 @@ int deplacementroi(int tab[][8], int li, int ci, int ld, int cd)
     {
         tab[li][ci] = 0;
         tab[ld][cd] = 19;
-        roc_ok_ou_pas(2); //le roi a bougÈ donc enleve le roi au roc
+        roc_ok_ou_pas(2); //le roi a boug√© donc enleve le roi au roc
 
     } else if (ld == li && (cd == ci+1 || cd == ci-1))
     {
@@ -85,7 +104,7 @@ int deplacementroi(int tab[][8], int li, int ci, int ld, int cd)
 int deplacementreine(int tab[][8], int li, int ci, int ld, int cd)
 {
     int i, vide = 1;
-    if(li>ld && ci < cd) //diagonale bas gauche ‡ haut droite
+    if(li>ld && ci < cd) //diagonale bas gauche √† haut droite
     {
         for(i=1; i<li - ld; i++)
         {
@@ -103,7 +122,7 @@ int deplacementreine(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(li < ld && ci > cd) //diagonale haut droite ‡ bas gauche
+    } else if(li < ld && ci > cd) //diagonale haut droite √† bas gauche
     {
         for(i=1; i<ld - li; i++)
         {
@@ -121,7 +140,7 @@ int deplacementreine(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(li > ld && ci > cd) //diagonale bas droite ‡ haut gauche
+    } else if(li > ld && ci > cd) //diagonale bas droite √† haut gauche
     {
         for(i=1; i<li - ld; i++)
         {
@@ -139,7 +158,7 @@ int deplacementreine(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(li < ld && ci < cd) //diagonale haut gauche ‡ bas droite
+    } else if(li < ld && ci < cd) //diagonale haut gauche √† bas droite
     {
         for(i=1; i<ld - li; i++)
         {
@@ -157,7 +176,7 @@ int deplacementreine(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(ld == li && cd > ci) // dÈplacement gauche ‡ droite
+    } else if(ld == li && cd > ci) // d√©placement gauche √† droite
     {
         for(i=1; i<cd-ci; i++)
         {
@@ -175,7 +194,7 @@ int deplacementreine(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(ld == li && cd < ci) // dÈplacement droite ‡ gauche
+    } else if(ld == li && cd < ci) // d√©placement droite √† gauche
     {
         for(i=1; i<ci-cd; i++)
         {
@@ -193,7 +212,7 @@ int deplacementreine(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(ld > li && cd == ci) // dÈplacement haut en bas
+    } else if(ld > li && cd == ci) // d√©placement haut en bas
     {
         for(i=1; i<ld-li; i++)
         {
@@ -211,7 +230,7 @@ int deplacementreine(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(ld < li && cd == ci) // dÈplacement bas en haut
+    } else if(ld < li && cd == ci) // d√©placement bas en haut
     {
         for(i=1; i<li-ld; i++)
         {
@@ -241,7 +260,7 @@ int deplacementreine(int tab[][8], int li, int ci, int ld, int cd)
 int deplacementtour(int tab[][8], int li, int ci, int ld, int cd)
 {
     int i, vide = 1;
-    if(ld == li && cd > ci) // dÈplacement gauche ‡ droite
+    if(ld == li && cd > ci) // d√©placement gauche √† droite
     {
         for(i=1; i<cd-ci; i++)
         {
@@ -259,7 +278,7 @@ int deplacementtour(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(ld == li && cd < ci) // dÈplacement droite ‡ gauche
+    } else if(ld == li && cd < ci) // d√©placement droite √† gauche
     {
         for(i=1; i<ci-cd; i++)
         {
@@ -277,7 +296,7 @@ int deplacementtour(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(ld > li && cd == ci) // dÈplacement haut en bas
+    } else if(ld > li && cd == ci) // d√©placement haut en bas
     {
         for(i=1; i<ld-li; i++)
         {
@@ -295,7 +314,7 @@ int deplacementtour(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(ld < li && cd == ci) // dÈplacement bas en haut
+    } else if(ld < li && cd == ci) // d√©placement bas en haut
     {
         for(i=1; i<li-ld; i++)
         {
@@ -319,7 +338,7 @@ int deplacementtour(int tab[][8], int li, int ci, int ld, int cd)
         return 0;
     }
 
-    return 1; // coup effectuÈ
+    return 1; // coup effectu√©
 }
 
 int deplacementcavalier(int tab[][8], int li, int ci, int ld, int cd)
@@ -338,13 +357,13 @@ int deplacementcavalier(int tab[][8], int li, int ci, int ld, int cd)
         return 0;
     }
 
-    return 1; // coup effectuÈ
+    return 1; // coup effectu√©
 }
 
 int deplacementfou(int tab[][8], int li, int ci, int ld, int cd)
 {
     int i, vide = 1;
-    if(li>ld && ci < cd) //diagonale bas gauche ‡ haut droite
+    if(li>ld && ci < cd) //diagonale bas gauche √† haut droite
     {
         for(i=1; i<li - ld; i++)
         {
@@ -362,7 +381,7 @@ int deplacementfou(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(li < ld && ci > cd) //diagonale haut droite ‡ bas gauche
+    } else if(li < ld && ci > cd) //diagonale haut droite √† bas gauche
     {
         for(i=1; i<ld - li; i++)
         {
@@ -380,7 +399,7 @@ int deplacementfou(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(li > ld && ci > cd) //diagonale bas droite ‡ haut gauche
+    } else if(li > ld && ci > cd) //diagonale bas droite √† haut gauche
     {
         for(i=1; i<li - ld; i++)
         {
@@ -398,7 +417,7 @@ int deplacementfou(int tab[][8], int li, int ci, int ld, int cd)
             printf("\n\n Ce coup n'est pas legal \n");
             return 0;
         }
-    } else if(li < ld && ci < cd) //diagonale haut gauche ‡ bas droite
+    } else if(li < ld && ci < cd) //diagonale haut gauche √† bas droite
     {
         for(i=1; i<ld - li; i++)
         {
@@ -421,7 +440,7 @@ int deplacementfou(int tab[][8], int li, int ci, int ld, int cd)
         printf("\n\n Ce coup n'est pas legal \n");
         return 0;
     }
-    return 1; //le coup s'est effectuÈ
+    return 1; //le coup s'est effectu√©
 
 }
 
@@ -458,44 +477,50 @@ int deplacementpion(int tab[][8], int li, int ci, int ld, int cd)
         printf("\n\n Ce coup n'est pas legal \n");
         return 0;
     }
-    return 1; //dÈplacement effectuÈ
+    return 1; //d√©placement effectu√©
 }
 
 
-int checkpiece(int tab[][8], int li, int ci, int ld, int cd)
+
+int checkpiece(int tab[][8], int li, int ci, int ld, int cd) //tour si = 0 blanc sinon noir
 {
     int r;
-    if(tab[li][ci] == 1) // la piËce choisi est un pion
+
+    if(tab[li][ci] == 1) // la pi√®ce choisi est un pion blanc
     {
         r = deplacementpion(tab, li, ci, ld, cd);
 
-    } else if(tab[li][ci] == 3) // la piËce choisi est un fou
+    } else if(tab[li][ci] == 1) // la pi√®ce choisi est un pion noir
+    {
+        r = deplacementpion(tab, li, ci, ld, cd);
+
+    } else if(tab[li][ci] == 3) // la pi√®ce choisi est un fou
     {
         r = deplacementfou(tab, li, ci, ld, cd);
 
-    } else if(tab[li][ci] == 4) // la piËce choisi est un cavalier
+    } else if(tab[li][ci] == 4) // la pi√®ce choisi est un cavalier
     {
         r = deplacementcavalier(tab, li, ci, ld, cd);
 
-    } else if(tab[li][ci] == 5) // la piËce choisi est une tour
+    } else if(tab[li][ci] == 5) // la pi√®ce choisi est une tour
     {
         r = deplacementtour(tab, li, ci, ld, cd);
 
-    } else if(tab[li][ci] == 10) // la piËce choisi est une reine
+    } else if(tab[li][ci] == 10) // la pi√®ce choisi est une reine
     {
         r = deplacementreine(tab, li, ci, ld, cd);
 
-    } else if(tab[li][ci] == 19) // la piËce choisi est un roi
+    } else if(tab[li][ci] == 19) // la pi√®ce choisi est un roi
     {
         r = deplacementroi(tab, li, ci, ld, cd);
     }
 
-    return r; //si r = 1, le dÈplacement s'est effectuÈ, sinon non
+    return r; //si r = 1, le d√©placement s'est effectu√©, sinon non
 
 }
 
 //alternative equivalent game boucle si en echec
-void tourjoueurechec(int tab[][8], int a) //le a sert pour l'altÈration de phrase et parce que pas besoin de verif echec et mat a chaque fois
+void tourjoueurechec(int tab[][8], int a) //le a sert pour l'alt√©ration de phrase et parce que pas besoin de verif echec et mat a chaque fois
 {
     int tabdebase[8][8];
     int i, j, v, ve;
@@ -516,20 +541,17 @@ void tourjoueurechec(int tab[][8], int a) //le a sert pour l'altÈration de phras
         ve = verifechecetmat(tab);
         if(ve == 0)
         {
-            return printf("\n\n Vous avez perdu par echec et mat ! \n\n ");
+            return printf("\n\n Victoire des Noirs par echec et mat ! \n\n ");
         }
     }
 
 
-
-
-
     if(a == 0)
     {
-        printf("\n\n VOUS ETES EN ECHEC \n\n");
+        printf("\n\n Blanc en ECHEC \n\n");
     } else
     {
-        printf("\n\n ATTENTION : Coup illegal, vous seriez toujours en echec \n\n");
+        printf("\n\n ATTENTION : Coup illegal des Blancs, vous seriez toujours en echec \n\n");
     }
 
     int li, //ligne de la case initial
@@ -587,9 +609,9 @@ void tourjoueurechec(int tab[][8], int a) //le a sert pour l'altÈration de phras
     v = verifechec(tab);
     if(v == 1)
     {
-        tourjoueurechec(tabdebase, 1); //le coup n'est pas validÈ, tjr en echec
+        tourjoueurechec(tabdebase, 1); //le coup n'est pas valid√©, tjr en echec
 
-    } else // le coup sort de l'echec donc il est validÈ et recopiÈ dans le tableau de base
+    } else // le coup sort de l'echec donc il est valid√© et recopi√© dans le tableau de base
     {
         for(i=0; i<8; i++)
         {
@@ -598,7 +620,14 @@ void tourjoueurechec(int tab[][8], int a) //le a sert pour l'altÈration de phras
                 tabdebase[i][j] = tab[i][j];
             }
         }
-        tourjoueur(tabdebase); // temporaire, faut envoyer ‡ adversaire l‡
+        // adversaire
+        if(choix == 1)
+        {
+            tourIA(tab);
+        } else
+        {
+            tourjoueur2(tab); // adversaire
+        }
     }
 
 }
@@ -607,7 +636,7 @@ void tourjoueurechec(int tab[][8], int a) //le a sert pour l'altÈration de phras
 void tourjoueur(int tab[][8])
 {
     int v, r, i, j;
-    int tabdebase[8][8]; // pour garder une copie de la table avant le changement, l‡ pour Èviter de sauvegarder un potentiel echec soi mÍme
+    int tabdebase[8][8]; // pour garder une copie de la table avant le changement, l√† pour √©viter de sauvegarder un potentiel echec soi m√™me
     for(i=0; i<8; i++)
     {
         for(j=0; j<8; j++)
@@ -623,6 +652,8 @@ void tourjoueur(int tab[][8])
         return tourjoueurechec(tab, 0);
     }
     affichageplateau(tab);
+
+    printf(" \n--- Tour des Blancs ---\n");
 
     int li, //ligne de la case initial
         ci, //colonne de la case initial
@@ -676,17 +707,25 @@ void tourjoueur(int tab[][8])
         }
     }
 
-    if(r == 1) // le coup est validÈ
+    if(r == 1) // le coup est valid√©
     {
         v = verifechec(tab);
-        if(v == 1) // dÈplacement est validÈ mais on se mettrait en echec tout seul -> pas autorisÈ
+        if(v == 1) // d√©placement est valid√© mais on se mettrait en echec tout seul -> pas autoris√©
         {
             printf("\n\n ATTENTION : Coup pas autorise car vous vous seriez mis tout seul en echec \n\n");
             tourjoueur(tabdebase);
+        } // sinon coup strictement valid√©, envoyer adversaire
+        if(choix == 1)
+        {
+            return tourIA(tab);
+        } else
+        {
+            return tourjoueur2(tab);
         }
-        tourjoueur(tab); // coup strictement validÈ, devra envoyer adversaire
+
     } else
     {
-        tourjoueur(tabdebase); //coup pas validÈ
+        return tourjoueur(tabdebase); //coup pas valid√©
     }
 }
+
