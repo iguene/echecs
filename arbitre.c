@@ -4,6 +4,7 @@
 #include "adversaire.h"
 #include "arbitre.h"
 #include "echecmat.h"
+#include "joueur2.h"
 
 void recopietab(int tab[][8], int copietab[][8])
 {
@@ -25,24 +26,56 @@ void affichageplateau(int tab[][8])
 
     int i, j;
 
-    printf("\n\n --------------------------------- \n\n Echiquier : \n\n");
+    printf("\n\n --------------------------------- \n\n Echiquier : \n\n       0   1   2   3   4   5   6   7  \n\n  ");
     for(i=0; i<8; i++)
     {
+        printf(" %d  ", i);
         for(j=0; j<8; j++)
         {
-            if(tab[i][j]<0)
+
+            if(tab[i][j] == 1)
             {
-                printf(" %d ", tab[i][j]);
-            } else if (tab[i][j]<= -10 || tab[i][j] >=10)
+                printf(" Pb ");
+            } else if(tab[i][j] == -1)
             {
-                printf("  %d", tab[i][j]);
+                printf(" Pn ");
+            } else if(tab[i][j] == 3)
+            {
+                printf(" Fb ");
+            } else if(tab[i][j] == -3)
+            {
+                printf(" Fn ");
+            } else if(tab[i][j] == 4)
+            {
+                printf(" Cb ");
+            } else if(tab[i][j] == -4)
+            {
+                printf(" Cn ");
+            } else if(tab[i][j] == 5)
+            {
+                printf(" Tb ");
+            } else if(tab[i][j] == -5)
+            {
+                printf(" Tn ");
+            } else if(tab[i][j] == 10)
+            {
+                printf(" Xb ");
+            } else if(tab[i][j] == -10)
+            {
+                printf(" Xn ");
+            } else if(tab[i][j] == 19)
+            {
+                printf(" Rb ");
+            } else if(tab[i][j] == -19)
+            {
+                printf(" Rn ");
             } else
             {
-                printf("  %d ", tab[i][j]);
+                printf(" -- ");
             }
         }
 
-        printf("\n");
+        printf("\n  ");
     }
     printf("\n\n --------------------------------- \n\n");
 }
@@ -70,10 +103,10 @@ int roc_ok_ou_pas(int n)
         {
             return 0; //peux pas roc
         }
-    } else if(n == 2) //roiblanc a bougé
+    } else if(n == 2) //roiblanc a bougÃ©
     {
         rocblanc = 0;
-    } else if(n == 3) //roinoir a bougé
+    } else if(n == 3) //roinoir a bougÃ©
     {
         rocnoir = 0;
     }
@@ -284,7 +317,7 @@ int veriffouechec(int tab[][8], int n, int m)
         i++;
         j++;
     }
-    if(tab[n+i][m+j] == 19)
+    if(tab[n-i][m-j] == 19)
     {
         return 1;
     } else
@@ -320,40 +353,317 @@ int verifechec(int tab[][8])
                 v = verifpionechec(tab, i, j);
                 if(v == 1)
                 {
-                    break;
+                    return v;
                 }
             } else if (tab[i][j] == -3)
             {
                 v = veriffouechec(tab, i, j);
                 if(v == 1)
                 {
-                    break;
+                    return v;
                 }
             } else if (tab[i][j] == -4)
             {
                 v = verifcavalierechec(tab, i, j);
                 if(v == 1)
                 {
-                    break;
+                    return v;
                 }
             } else if (tab[i][j] == -5)
             {
                 v = veriftourechec(tab, i, j);
                 if(v == 1)
                 {
-                    break;
+                    return v;
                 }
             } else if (tab[i][j] == -10)
             {
                 v = verifreineechec(tab, i, j);
                 if(v == 1)
                 {
-                    break;
+                    return v;
                 }
             }
         }
     }
-    return v; //si v == 1 alors le joueur est en échec
+    return v; //si v == 1 alors le joueur est en Ã©chec
+
+}
+
+
+
+int verifpionechecnoir(int tab[][8], int n, int m)
+{
+    if(n-1 >= 0 && m+1 < 8)
+    {
+        if(tab[n-1][m+1] == -19)
+        {
+            return 1; //le roi adverse est en echec par le pion
+        }
+    }
+    if(n-1 >= 0 && m-1 >= 0)
+    {
+        if(tab[n-1][m-1] == -19)
+        {
+            return 1; //le roi adverse est en echec par le pion
+        }
+    }
+    return 0;
+}
+
+int verifcavalierechecnoir(int tab[][8], int n, int m)
+{
+    if(n+2 < 8)
+    {
+        if(m-1 >= 0)
+        {
+            if(tab[n+2][m-1] == -19)
+            {
+                return 1;
+            }
+        }
+        if(m+1 < 8)
+        {
+            if(tab[n+2][m+1] == -19)
+            {
+                return 1;
+            }
+        }
+    }
+
+    if(n-2 >= 0)
+    {
+        if(m-1 >= 0)
+        {
+            if(tab[n-2][m-1] == -19)
+            {
+                return 1;
+            }
+        }
+        if(m+1 < 8)
+        {
+            if(tab[n-2][m+1] == -19)
+            {
+                return 1;
+            }
+        }
+    }
+
+    if(m-2 >= 0)
+    {
+        if(n-1 >= 0)
+        {
+            if(tab[n-1][m-2] == -19)
+            {
+                return 1;
+            }
+        }
+        if(n+1 < 8)
+        {
+            if(tab[n-1][m-2] == -19)
+            {
+                return 1;
+            }
+        }
+    }
+
+    if(m+2 < 8)
+    {
+        if(n-1 >= 0)
+        {
+            if(tab[n-1][m+2] == -19)
+            {
+                return 1;
+            }
+        }
+        if(n+1 < 8)
+        {
+            if(tab[n+1][m+2] == -19)
+            {
+                return 1;
+            }
+        }
+    }
+
+
+    return 0; // le cavalier ne mets pas le roi en echec
+}
+
+int veriftourechecnoir(int tab[][8], int n, int m)
+{
+    int i = 1;
+    while(tab[n][m+i] == 0 && m+i < 7)
+    {
+        i++;
+    }
+    if(tab[n][m+i] == -19)
+    {
+        return 1;
+    } else
+    {
+        i = 1;
+    }
+
+     while(tab[n][m-i] == 0 && m-i > 0)
+    {
+        i++;
+    }
+    if(tab[n][m-i] == -19)
+    {
+        return 1;
+    } else
+    {
+        i = 1;
+    }
+
+     while(tab[n+i][m] == 0 && n+i < 7)
+    {
+        i++;
+    }
+    if(tab[n+i][m] == -19)
+    {
+        return 1;
+    } else
+    {
+        i = 1;
+    }
+
+    while(tab[n-i][m] == 0 && n-i > 0)
+    {
+        i++;
+    }
+    if(tab[n-i][m] == -19)
+    {
+        return 1;
+    } else
+    {
+        i = 1;
+    }
+
+    return 0; //la tour n'attaque pas le roi
+
+}
+
+int veriffouechecnoir(int tab[][8], int n, int m)
+{
+    int i = 1, j = 1;
+    while(tab[n+i][m+j] == 0 && n+i < 7 && m+j < 7)
+    {
+        i++;
+        j++;
+    }
+    if(tab[n+i][m+j] == -19)
+    {
+        return 1;
+    } else
+    {
+        i = 1;
+        j = 1;
+    }
+
+    while(tab[n+i][m-j] == 0 && n+i < 7 && m-j > 0)
+    {
+        i++;
+        j++;
+    }
+    if(tab[n+i][m-j] == -19)
+    {
+        return 1;
+    } else
+    {
+        i = 1;
+        j = 1;
+    }
+
+    while(tab[n-i][m+j] == 0 && n-i > 0 && m+j < 7)
+    {
+        i++;
+        j++;
+    }
+    if(tab[n-i][m+j] == -19)
+    {
+        return 1;
+    } else
+    {
+        i = 1;
+        j = 1;
+    }
+
+    while(tab[n-i][m-j] == 0 && n-i > 0 && m-j > 0)
+    {
+        i++;
+        j++;
+    }
+    if(tab[n-i][m-j] == -19)
+    {
+        return 1;
+    } else
+    {
+        i = 1;
+        j = 1;
+    }
+
+    return 0; //le fou ne mets pas le roi adverse en echec
+}
+
+int verifreineechecnoir(int tab[][8], int i, int j)
+{
+    int v;
+    v = veriffouechecnoir(tab, i, j);
+    if (v == 0)
+    {
+        v = veriftourechecnoir(tab, i, j);
+    }
+    return v;
+}
+
+int verifechecnoir(int tab[][8])
+{
+    int i, j, v;
+
+    for(i = 0; i < 8; i++)
+    {
+        for(j = 0; j < 8; j++)
+        {
+            if(tab[i][j] == 1)
+            {
+                v = verifpionechecnoir(tab, i, j);
+                if(v == 1)
+                {
+                    return v;
+                }
+            } else if (tab[i][j] == 3)
+            {
+                v = veriffouechecnoir(tab, i, j);
+                if(v == 1)
+                {
+                    return v;
+                }
+            } else if (tab[i][j] == 4)
+            {
+                v = verifcavalierechecnoir(tab, i, j);
+                if(v == 1)
+                {
+                    return v;
+                }
+            } else if (tab[i][j] == 5)
+            {
+                v = veriftourechecnoir(tab, i, j);
+                if(v == 1)
+                {
+                    return v;
+                }
+            } else if (tab[i][j] == 10)
+            {
+                v = verifreineechecnoir(tab, i, j);
+                if(v == 1)
+                {
+                    return v;
+                }
+            }
+        }
+    }
+    return v; //si v == 1 alors le joueur est en Ã©chec
 
 }
 
