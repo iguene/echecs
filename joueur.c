@@ -486,11 +486,7 @@ int checkpiece(int tab[][8], int li, int ci, int ld, int cd) //tour si = 0 blanc
 {
     int r;
 
-    if(tab[li][ci] == 1) // la pièce choisi est un pion blanc
-    {
-        r = deplacementpion(tab, li, ci, ld, cd);
-
-    } else if(tab[li][ci] == 1) // la pièce choisi est un pion noir
+    if(tab[li][ci] == 1) // la pièce choisi est un pion 
     {
         r = deplacementpion(tab, li, ci, ld, cd);
 
