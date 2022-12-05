@@ -609,7 +609,7 @@ void tourjoueurechec(int tab[][8], int a) //le a sert pour l'altération de phra
     v = verifechec(tab);
     if(v == 1)
     {
-        tourjoueurechec(tabdebase, 1); //le coup n'est pas validé, tjr en echec
+        return tourjoueurechec(tabdebase, 1); //le coup n'est pas validé, tjr en echec
 
     } else // le coup sort de l'echec donc il est validé et recopié dans le tableau de base
     {
@@ -623,10 +623,10 @@ void tourjoueurechec(int tab[][8], int a) //le a sert pour l'altération de phra
         // adversaire
         if(choix == 1)
         {
-            tourIA(tab);
+            return tourIA(tab);
         } else
         {
-            tourjoueur2(tab); // adversaire
+            return tourjoueur2(tab); // adversaire
         }
     }
 
@@ -713,7 +713,7 @@ void tourjoueur(int tab[][8])
         if(v == 1) // déplacement est validé mais on se mettrait en echec tout seul -> pas autorisé
         {
             printf("\n\n ATTENTION : Coup pas autorise car vous vous seriez mis tout seul en echec \n\n");
-            tourjoueur(tabdebase);
+            return tourjoueur(tabdebase);
         } // sinon coup strictement validé, envoyer adversaire
         if(choix == 1)
         {
