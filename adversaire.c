@@ -95,23 +95,24 @@ void listecoupspionnoir()
 //ajout liste des coups possibles pour un pion blanc
 void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *liste)
 {
-    coup *coup1;
+    coup *couppion; 
     int legal;
     if(tab[li-1][ci]==0) // pas besoin de vérifier que li-1 >= 0 juste pour le pion car il se transformerait en reine si il est à la ligne 0 de toute façon
     {
-        coup1 = creationcoup(li, ci, li-1, ci);
+        couppion = creationcoup(li, ci, li-1, ci);
         //faut vérifier que le coup est légal avant de l'ajouter c'est à dire qu'il ne mets pas le roi en échec
         changetabcoup(copietab, li, ci, li-1, ci, 1);
         legal = verifechec(copietab); //appel de verification echec pour blanc
         if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
         {
-            ajoutefrere(liste, coup1);
+            ajoutefrere(liste, couppion);
         }
         recopietab(tab, copietab); //faut faire ça pour que la copie puisse être utilisable en tant que référence pour voir si un changement est possible
     }
 
     /*il manque les cas de déplacements d'une diagonale si il y a une piece adverse c'est à dire tab[li-1][ci-1] ou tab[li-1][ci+1] < 0
-    et le cas où le pion est à la ligne 6 donc il a le droit d'avancer de deux cases si il n'y a pas de pion dans le chemin*/
+    et le cas où le pion est à la ligne 6 donc il a le droit d'avancer de deux cases si il n'y a pas de pion dans le chemin, on a le droit de refaire 
+    couppion = creationcoup(li, ci, .., ..) car c'est une adresse et elle a déjà été ajouté à la fin de la liste donc là on alloue une nouvelle adresse*/
 
 }
 
