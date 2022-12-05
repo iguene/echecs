@@ -590,7 +590,7 @@ void tourjoueur2echec(int tab[][8], int a) //le a sert pour l'altération de phr
     v = verifechecnoir(tab);
     if(v == 1)
     {
-        tourjoueur2echec(tabdebase, 1); //le coup n'est pas validé, tjr en echec
+        return tourjoueur2echec(tabdebase, 1); //le coup n'est pas validé, tjr en echec
 
     } else // le coup sort de l'echec donc il est validé et recopié dans le tableau de base
     {
@@ -601,7 +601,7 @@ void tourjoueur2echec(int tab[][8], int a) //le a sert pour l'altération de phr
                 tabdebase[i][j] = tab[i][j];
             }
         }
-        tourjoueur(tabdebase); // envoyer à adversaire
+        return tourjoueur(tabdebase); // envoyer à adversaire
     }
 
 }
@@ -689,11 +689,11 @@ void tourjoueur2(int tab[][8])
         if(v == 1) // déplacement est validé mais on se mettrait en echec tout seul -> pas autorisé
         {
             printf("\n\n ATTENTION : Coup pas autorise car vous vous seriez mis tout seul en echec \n\n");
-            tourjoueur2(tabdebase);
+            return tourjoueur2(tabdebase);
         }
-        tourjoueur(tab); // coup strictement validé, devra envoyer adversaire
+        return tourjoueur(tab); // coup strictement validé, devra envoyer adversaire
     } else
     {
-        tourjoueur2(tabdebase); //coup pas validé
+        return tourjoueur2(tabdebase); //coup pas validé
     }
 }
