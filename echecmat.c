@@ -5,6 +5,7 @@
 #include "arbitre.h"
 #include "echecmat.h"
 #include "joueur2.h"
+#include "echecetmatjoueur2.h"
 
 int sortieecheccavalier(int tab[][8], int copietab[][8], int n, int m)
 {
