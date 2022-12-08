@@ -5,6 +5,7 @@
 #include "arbitre.h"
 #include "echecmat.h"
 #include "joueur2.h"
+#include "echecetmatjoueur2.h"
 
 int choix = 1;
 
