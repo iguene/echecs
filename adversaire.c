@@ -49,6 +49,28 @@ coup *creationcoup(int li, int ci, int ld, int cd)
     return c;
 }
 
+void affichagelistecoups(coup *l)
+{
+    printf(" \n %d,%d ->%d,%d", l->li, l->ci, l->ld, l->cd);
+    if(l->frere != NULL)
+    {
+        affichagelistecoups(l->frere);
+    }
+}
+
+void liberation_rec(coup *l)
+{
+    if(l!=NULL)
+    {
+        if(l->frere!=NULL)
+        {
+            liberation_rec(l->frere);
+        }
+        free(l);
+    }
+}
+
+
 /*ajoute un coup en fin de liste*/
 coup *ajoutefrere(coup *ainee, coup *cadet)
 {
@@ -91,9 +113,9 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
 {
     coup *coup;
     int legal;
-    if(tab[li+1][ci]==0) 
+    if(tab[li+1][ci]==0)
     {
-        coup1 = creationcoup(li, ci, li+1, ci);
+        coup = creationcoup(li, ci, li+1, ci);
         //faut vérifier que le coup est légal avant de l'ajouter c'est à dire qu'il ne mets pas le roi en échec
         changetabcoup(copietab, li, ci, li+1, ci, -1);
         legal = verifechec(copietab); //appel de verification echec pour blanc
@@ -101,43 +123,43 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
         {
             ajoutefrere(liste, coup);
         }
-        recopietab(tab, copietab); 
+        recopietab(tab, copietab);
     }
-    
-    if(tab[li+1][ci-1] > 0) 
+
+    if(tab[li+1][ci-1] > 0)
     {
-        coup1 = creationcoup(li, ci, li+1, ci-1);
+        coup = creationcoup(li, ci, li+1, ci-1);
         changetabcoup(copietab, li, ci, li+1, ci-1, -1);
         legal = verifechec(copietab);
         if(legal == 0)
         {
             ajoutefrere(liste, coup);
         }
-        recopietab(tab, copietab); 
+        recopietab(tab, copietab);
     }
-    
-    if(tab[li+1][ci+1] > 0) 
+
+    if(tab[li+1][ci+1] > 0)
     {
-        coup1 = creationcoup(li, ci, li+1, ci+1);
+        coup = creationcoup(li, ci, li+1, ci+1);
         changetabcoup(copietab, li, ci, li+1, ci+1, -1);
         legal = verifechec(copietab);
         if(legal == 0)
         {
             ajoutefrere(liste, coup);
         }
-        recopietab(tab, copietab); 
+        recopietab(tab, copietab);
     }
-    
-    if(tab[li+1][ci] == 0 && tab[li+2][ci] == 0 && li == 1) 
+
+    if(tab[li+1][ci] == 0 && tab[li+2][ci] == 0 && li == 1)
     {
-        coup1 = creationcoup(li, ci, li+2, ci);
+        coup = creationcoup(li, ci, li+2, ci);
         changetabcoup(copietab, li, ci, li+2, ci, -1);
         legal = verifechec(copietab);
         if(legal == 0)
         {
             ajoutefrere(liste, coup);
         }
-        recopietab(tab, copietab); 
+        recopietab(tab, copietab);
     }
 }
 
@@ -146,9 +168,9 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
 {
     coup *coup;
     int legal;
-    if(tab[li-1][ci]==0) 
+    if(tab[li-1][ci]==0)
     {
-        coup1 = creationcoup(li, ci, li-1, ci);
+        coup = creationcoup(li, ci, li-1, ci);
         //faut vérifier que le coup est légal avant de l'ajouter c'est à dire qu'il ne mets pas le roi en échec
         changetabcoup(copietab, li, ci, li-1, ci, 1);
         legal = verifechec(copietab); //appel de verification echec pour blanc
@@ -156,43 +178,43 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
         {
             ajoutefrere(liste, coup);
         }
-        recopietab(tab, copietab); 
+        recopietab(tab, copietab);
     }
-    
-    if(tab[li-1][ci-1] < 0) 
+
+    if(tab[li-1][ci-1] < 0)
     {
-        coup1 = creationcoup(li, ci, li-1, ci-1);
+        coup = creationcoup(li, ci, li-1, ci-1);
         changetabcoup(copietab, li, ci, li-1, ci-1, 1);
         legal = verifechec(copietab);
         if(legal == 0)
         {
             ajoutefrere(liste, coup);
         }
-        recopietab(tab, copietab); 
+        recopietab(tab, copietab);
     }
-    
-    if(tab[li-1][ci+1] < 0) 
+
+    if(tab[li-1][ci+1] < 0)
     {
-        coup1 = creationcoup(li, ci, li-1, ci+1);
+        coup = creationcoup(li, ci, li-1, ci+1);
         changetabcoup(copietab, li, ci, li-1, ci+1, 1);
         legal = verifechec(copietab);
         if(legal == 0)
         {
             ajoutefrere(liste, coup);
         }
-        recopietab(tab, copietab); 
+        recopietab(tab, copietab);
     }
-    
-    if(tab[li-1][ci] == 0 && tab[li-2][ci] == 0 && li == 6) 
+
+    if(tab[li-1][ci] == 0 && tab[li-2][ci] == 0 && li == 6)
     {
-        coup1 = creationcoup(li, ci, li-2, ci);
+        coup = creationcoup(li, ci, li-2, ci);
         changetabcoup(copietab, li, ci, li-2, ci, 1);
         legal = verifechec(copietab);
         if(legal == 0)
         {
             ajoutefrere(liste, coup);
         }
-        recopietab(tab, copietab); 
+        recopietab(tab, copietab);
     }
 
 }
@@ -202,12 +224,10 @@ void creationlistecoup(int tab[][8], int tour, coup *liste) //si tour == 0 alors
 {
     int i, j;
 
-    int copietab[8][8]; //pour pouvoir manipuler celui là pour vérifier la légalité des coups
+    int copietab[8][8];
 
     recopietab(tab, copietab);
 
-    /* pour les pions faut faire deux fonctions différentes car les déplacements varient entre les sens de déplacezments selon les joueurs
-    mais pour le reste on peut faire que des valeurs positives multiplier par tourjoueur c'est à dire par -1 */
     for(i = 0; i < 8; i++)
     {
         for(j = 0; j < 8; j++)
