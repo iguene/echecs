@@ -116,12 +116,11 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
     if(tab[li+1][ci]==0)
     {
         coup = creationcoup(li, ci, li+1, ci);
-        //faut vérifier que le coup est légal avant de l'ajouter c'est à dire qu'il ne mets pas le roi en échec
         changetabcoup(copietab, li, ci, li+1, ci, -1);
-        legal = verifechec(copietab); //appel de verification echec pour blanc
+        legal = verifechecnoir(copietab); //appel de verification echec pour noir
         if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
         {
-            ajoutefrere(liste, coup);
+            liste = ajoutefrere(liste, coup);
         }
         recopietab(tab, copietab);
     }
@@ -133,7 +132,7 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
         legal = verifechec(copietab);
         if(legal == 0)
         {
-            ajoutefrere(liste, coup);
+            liste = ajoutefrere(liste, coup);
         }
         recopietab(tab, copietab);
     }
@@ -145,7 +144,7 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
         legal = verifechec(copietab);
         if(legal == 0)
         {
-            ajoutefrere(liste, coup);
+            liste = ajoutefrere(liste, coup);
         }
         recopietab(tab, copietab);
     }
@@ -157,7 +156,7 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
         legal = verifechec(copietab);
         if(legal == 0)
         {
-            ajoutefrere(liste, coup);
+            liste = ajoutefrere(liste, coup);
         }
         recopietab(tab, copietab);
     }
@@ -171,7 +170,6 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
     if(tab[li-1][ci]==0)
     {
         coup = creationcoup(li, ci, li-1, ci);
-        //faut vérifier que le coup est légal avant de l'ajouter c'est à dire qu'il ne mets pas le roi en échec
         changetabcoup(copietab, li, ci, li-1, ci, 1);
         legal = verifechec(copietab); //appel de verification echec pour blanc
         if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
@@ -188,7 +186,7 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
         legal = verifechec(copietab);
         if(legal == 0)
         {
-            ajoutefrere(liste, coup);
+            liste = ajoutefrere(liste, coup);
         }
         recopietab(tab, copietab);
     }
@@ -200,7 +198,7 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
         legal = verifechec(copietab);
         if(legal == 0)
         {
-            ajoutefrere(liste, coup);
+            liste = ajoutefrere(liste, coup);
         }
         recopietab(tab, copietab);
     }
@@ -212,7 +210,7 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
         legal = verifechec(copietab);
         if(legal == 0)
         {
-            ajoutefrere(liste, coup);
+            liste = ajoutefrere(liste, coup);
         }
         recopietab(tab, copietab);
     }
@@ -294,10 +292,12 @@ int eval(int tab[][8])
 
 void tourIA(int tab[][8])
 {
-    coup *liste = NULL;
+    coup *liste;
 
     creationlistecoup(tab, 1, liste);
 
     affichagelistecoups(liste);
+
+    liberation_rec(liste);
 
 }
