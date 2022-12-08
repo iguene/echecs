@@ -131,7 +131,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
         recopietab(tab, copietab);
         i++;
         j++;
-        if(i > 7 || j > 7) // pour éviter de faire un segmentation fault genre tab[8][7] ça existe pas le tableau va de [0][0] à [7][7]
+        if(li+i > 7 || ci+j > 7) // pour éviter de faire un segmentation fault genre tab[8][7] ça existe pas le tableau va de [0][0] à [7][7]
         {
             bordure = 0; //sort de la boucle
         }
@@ -190,7 +190,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
         recopietab(tab, copietab);
         i++;
         j++;
-        if(i < 0 || j < 0)
+        if(li-i < 0 || ci-j < 0)
         {
             bordure = 0;
         }
@@ -249,7 +249,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
         recopietab(tab, copietab);
         i++;
         j++;
-        if(i < 0 || j > 7)
+        if(li-i < 0 || ci+j > 7)
         {
             bordure = 0;
         }
@@ -306,7 +306,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
         recopietab(tab, copietab);
         i++;
         j++;
-        if(i > 7 || j < 0)
+        if(li+i > 7 || ci-j < 0)
         {
             bordure = 0;
         }
