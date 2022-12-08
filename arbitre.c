@@ -5,6 +5,7 @@
 #include "arbitre.h"
 #include "echecmat.h"
 #include "joueur2.h"
+#include "echecetmatjoueur2.h"
 
 void recopietab(int tab[][8], int copietab[][8])
 {
@@ -342,7 +343,7 @@ int verifreineechec(int tab[][8], int i, int j)
 
 int verifechec(int tab[][8])
 {
-    int i, j, v;
+    int i, j, v = 0;
 
     for(i = 0; i < 8; i++)
     {
@@ -619,7 +620,7 @@ int verifreineechecnoir(int tab[][8], int i, int j)
 
 int verifechecnoir(int tab[][8])
 {
-    int i, j, v;
+    int i, j, v = 0;
 
     for(i = 0; i < 8; i++)
     {
