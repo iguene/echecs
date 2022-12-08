@@ -220,11 +220,13 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
 }
 
 /*Fait la liste des coups pour un échiquier*/
-void creationlistecoup(int tab[][8], int tour, coup *liste) //si tour == 0 alors liste des coups du joueur sinon si -1 alors liste de l'ia
+coup *creationlistecoup(int tab[][8], int tour) //si tour == 0 alors liste des coups du joueur sinon si -1 alors liste de l'ia
 {
     int i, j;
 
     int copietab[8][8];
+
+    coup *liste;
 
     recopietab(tab, copietab);
 
@@ -262,6 +264,8 @@ void creationlistecoup(int tab[][8], int tour, coup *liste) //si tour == 0 alors
             }
         }
     }
+
+    return liste;
 }
 
 
@@ -294,5 +298,8 @@ int eval(int tab[][8])
 void tourIA(int tab[][8])
 {
     coup *liste;
+    liste = creationlistecoup(tab, 1);
+
+    affichagelistecoups(&liste);
 
 }
