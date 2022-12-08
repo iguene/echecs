@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include "joueur.h"
 #include "adversaire.h"
 #include "arbitre.h"
 #include "echecmat.h"
 #include "joueur2.h"
+#include "echecetmatjoueur2.h"
 
 //tente de réunir les conditions du minimax : faut faire une listes de tout les coups possible pour chaque joueur sur plusieurs profondeurs
 
@@ -300,6 +300,6 @@ void tourIA(int tab[][8])
     coup *liste;
     liste = creationlistecoup(tab, 1);
 
-    affichagelistecoups(&liste);
+    affichagelistecoups(liste);
 
 }
