@@ -51,7 +51,7 @@ coup *creationcoup(int li, int ci, int ld, int cd)
 
 void affichagelistecoups(coup *l)
 {
-    printf(" \n %d,%d ->%d,%d", l->li, l->ci, l->ld, l->cd);
+    printf("\n%d,%d ->%d,%d", l->li, l->ci, l->ld, l->cd);
     if(l->frere != NULL)
     {
         affichagelistecoups(l->frere);
@@ -78,7 +78,7 @@ coup *ajoutefrere(coup *ainee, coup *cadet)
     {
         return cadet;
     }
-    ainee = ajoutefrere(ainee->frere, cadet);
+    ainee->frere = ajoutefrere(ainee->frere, cadet);
     return ainee;
 }
 
@@ -176,7 +176,7 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
         legal = verifechec(copietab); //appel de verification echec pour blanc
         if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
         {
-            ajoutefrere(liste, coup);
+            liste = ajoutefrere(liste, coup);
         }
         recopietab(tab, copietab);
     }
@@ -294,8 +294,8 @@ int eval(int tab[][8])
 
 void tourIA(int tab[][8])
 {
-    coup *liste;
-    
+    coup *liste = NULL;
+
     creationlistecoup(tab, 1, liste);
 
     affichagelistecoups(liste);
