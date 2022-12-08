@@ -84,27 +84,27 @@ coup *ajoutefrere(coup *ainee, coup *cadet)
 
 
 
-void listecoupsroi()
+void listecoupsroi(int tab[][8], int copietab[][8], int li, int ci, coup *liste, int tour)
 {
 
 }
 
-void listecoupsreine()
+void listecoupsreine(int tab[][8], int copietab[][8], int li, int ci, coup *liste, int tour)
 {
 
 }
 
-void listecoupstour()
+void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste, int tour)
 {
 
 }
 
-void listecoupscavalier()
+void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *liste, int tour)
 {
 
 }
 
-void listecoupsfou()
+void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste, int tour)
 {
 
 }
