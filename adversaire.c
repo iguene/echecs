@@ -720,7 +720,225 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
 
 void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *liste, int tour)
 {
+    coup *coup;
+    int legal;
 
+    if(li+2 < 8)
+    {
+        if(ci+1 < 8)
+        {
+            if(tour == 1 && tab[li+2][ci+1] < 1)
+            {
+                coup = creationcoup(li, ci, li+2, ci+1);
+                changetabcoup(copietab, li, ci, li+2, ci+1, 4);
+                legal = verifechec(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+            if(tour == -1 && tab[li+2][ci+1] > -1)
+            {
+                coup = creationcoup(li, ci, li+2, ci+1);
+                changetabcoup(copietab, li, ci, li+2, ci+1, -4);
+                legal = verifechecnoir(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+        }
+        if(ci-1 >= 0)
+        {
+            if(tour == 1 && tab[li+2][ci-1] < 1)
+            {
+                coup = creationcoup(li, ci, li+2, ci-1);
+                changetabcoup(copietab, li, ci, li+2, ci-1, 4);
+                legal = verifechec(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+            if(tour == -1 && tab[li+2][ci-1] > -1)
+            {
+                coup = creationcoup(li, ci, li+2, ci-1);
+                changetabcoup(copietab, li, ci, li+2, ci-1, -4);
+                legal = verifechecnoir(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+        }
+    }
+
+    if(li-2 >= 0)
+    {
+        if(ci+1 < 8)
+        {
+            if(tour == 1 && tab[li-2][ci+1] < 1)
+            {
+                coup = creationcoup(li, ci, li-2, ci+1);
+                changetabcoup(copietab, li, ci, li-2, ci+1, 4);
+                legal = verifechec(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+            if(tour == -1 && tab[li-2][ci+1] > -1)
+            {
+                coup = creationcoup(li, ci, li-2, ci+1);
+                changetabcoup(copietab, li, ci, li-2, ci+1, -4);
+                legal = verifechecnoir(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+        }
+        if(ci-1 >= 0)
+        {
+            if(tour == 1 && tab[li-2][ci-1] < 1)
+            {
+                coup = creationcoup(li, ci, li-2, ci-1);
+                changetabcoup(copietab, li, ci, li-2, ci-1, 4);
+                legal = verifechec(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+            if(tour == -1 && tab[li-2][ci-1] > -1)
+            {
+                coup = creationcoup(li, ci, li-2, ci-1);
+                changetabcoup(copietab, li, ci, li-2, ci-1, -4);
+                legal = verifechecnoir(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+        }
+    }
+
+    if(li+1 < 8)
+    {
+        if(ci+2 < 8)
+        {
+            if(tour == 1 && tab[li+1][ci+2] < 1)
+            {
+                coup = creationcoup(li, ci, li+1, ci+2);
+                changetabcoup(copietab, li, ci, li+1, ci+2, 4);
+                legal = verifechec(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+            if(tour == -1 && tab[li+1][ci+2] > -1)
+            {
+                coup = creationcoup(li, ci, li+1, ci+2);
+                changetabcoup(copietab, li, ci, li+1, ci+2, -4);
+                legal = verifechecnoir(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+        }
+        if(ci-2 >= 0)
+        {
+            if(tour == 1 && tab[li+1][ci-2] < 1)
+            {
+                coup = creationcoup(li, ci, li+1, ci-2);
+                changetabcoup(copietab, li, ci, li+1, ci-2, 4);
+                legal = verifechec(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+            if(tour == -1 && tab[li+1][ci-2] > -1)
+            {
+                coup = creationcoup(li, ci, li+1, ci-2);
+                changetabcoup(copietab, li, ci, li+1, ci-2, -4);
+                legal = verifechecnoir(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+        }
+    }
+
+
+    if(li-1 >= 0)
+    {
+        if(ci+2 < 8)
+        {
+            if(tour == 1 && tab[li-1][ci+2] < 1)
+            {
+                coup = creationcoup(li, ci, li-1, ci+2);
+                changetabcoup(copietab, li, ci, li-1, ci+2, 4);
+                legal = verifechec(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+            if(tour == -1 && tab[li-1][ci+2] > -1)
+            {
+                coup = creationcoup(li, ci, li-1, ci+2);
+                changetabcoup(copietab, li, ci, li-1, ci+2, -4);
+                legal = verifechecnoir(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+        }
+        if(ci-2 >= 0)
+        {
+            if(tour == 1 && tab[li-1][ci-2] < 1)
+            {
+                coup = creationcoup(li, ci, li-1, ci-2);
+                changetabcoup(copietab, li, ci, li-1, ci-2, 4);
+                legal = verifechec(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+            if(tour == -1 && tab[li-2][ci-2] > -1)
+            {
+                coup = creationcoup(li, ci, li-1, ci-2);
+                changetabcoup(copietab, li, ci, li-1, ci-2, -4);
+                legal = verifechecnoir(copietab);
+                if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                {
+                    liste = ajoutefrere(liste, coup);
+                }
+                recopietab(tab, copietab);
+            }
+        }
+    }
 }
 
 void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste, int tour, int valeur) //valeur 3 si c'est pour liste de coups du fou et valeur 10 reine
@@ -1129,11 +1347,11 @@ void creationlistecoup(int tab[][8], int tour, coup *liste) //si tour == 1 alors
 
             } else if(tab[i][j] == 4 && tour == 1)
             {
-                //listecoupscavalier();
+                listecoupscavalier(tab, copietab, i, j, liste, tour);
 
             } else if(tab[i][j] == -4 && tour == -1)
             {
-                //listecoupscavalier();
+                listecoupscavalier(tab, copietab, i, j, liste, tour);
 
             } else if(tab[i][j] == 5 && tour == 1)
             {
@@ -1196,7 +1414,7 @@ void tourIA(int tab[][8])
 
     liste = creationcoup(0, 0, 0, 0);
 
-    creationlistecoup(tab, 1, liste);
+    creationlistecoup(tab, -1, liste);
 
     affichagelistecoups(liste);
 
