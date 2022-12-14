@@ -53,7 +53,8 @@ void quelpiecechoisi(int tab[][8], int li, int ci)
 int deplacementroi(int tab[][8], int li, int ci, int ld, int cd)
 {
     int canroc;
-    if(tab[ld+1][cd+1] == -19 || tab[ld+1][cd] == -19 || tab[ld+1][cd-1] == -19 || tab[ld][cd+1] == -19 || tab[ld][cd-1] == -19 || tab[ld-1][cd-1] == -19 || tab[ld-1][cd] == -19 || tab[ld-1][cd+1] == -19)
+    int sapproche = roisapproche(tab, 1, ld, cd);
+    if(sapproche == 1)
     {
         printf("\n\n Ce coup n'est pas legal \n"); //le roi ne peut pas s'approcher de l'autre roi
         return 0;
@@ -487,7 +488,7 @@ int checkpiece(int tab[][8], int li, int ci, int ld, int cd) //tour si = 0 blanc
 {
     int r;
 
-    if(tab[li][ci] == 1) // la pièce choisi est un pion 
+    if(tab[li][ci] == 1) // la pièce choisi est un pion blanc
     {
         r = deplacementpion(tab, li, ci, ld, cd);
 
@@ -725,4 +726,3 @@ void tourjoueur(int tab[][8])
         return tourjoueur(tabdebase); //coup pas validé
     }
 }
-
