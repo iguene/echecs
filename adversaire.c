@@ -1447,19 +1447,19 @@ int eval(int tab[][8], int turn)
 }
 
 /*
-int minimax(int depth, int turn, int tab[][8], int copietab[][8], int alpha, int beta)
+int minimax(int profondeur, int tour, int tab[][8], int copietab[][8], int alpha, int beta)
 {
     int v;
     coup *liste = NULL;
     liste = creationcoup(0, 0, 0, 0);
     creationlistecoup(tab, 1, liste);
     recopietab(tab, copietab);
-    if(depth == 0)
+    if(profondeur == 0)
     {
-        int resultat = eval(tab, turn);
+        int resultat = eval(tab, tour);
         return resultat;
     }
-    if(turn == -1)
+    if(tour == -1)
     {
         v = 50000;
         while(liste != NULL)
@@ -1473,12 +1473,25 @@ int minimax(int depth, int turn, int tab[][8], int copietab[][8], int alpha, int
 
 void tourIA(int tab[][8])
 {
+    //D'abord vérifier si la partie n'est pas déjà en echec et mat
+    int v, ve;
+    v = verifechec(tab);
+    if (v == 1)
+    {
+        ve = verifechecetmat(tab);
+        if (ve == 0)
+        {
+            return printf("\n\n Victoire des blancs par echec et mat ! \n\n ");
+        }
+    }
+
     coup *liste = NULL;
-    //liste = creationcoup(0, 0, 0, 0);
+    liste = creationcoup(0, 0, 0, 0);
     creationlistecoup(tab, 1, liste);
 
     affichagelistecoups(liste);
 
     liberation_rec(liste);
 
+    //ici faudra appliquer le meilleur coup de l'ia sur l'échiquier puis renvoyer à tourjoueur
 }
