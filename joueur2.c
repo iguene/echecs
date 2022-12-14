@@ -34,7 +34,8 @@ void quelpiecechoisinoir(int tab[][8], int li, int ci)
 int deplacementroinoir(int tab[][8], int li, int ci, int ld, int cd)
 {
     int canroc;
-    if(tab[ld+1][cd+1] == 19 || tab[ld+1][cd] == 19 || tab[ld+1][cd-1] == 19 || tab[ld][cd+1] == 19 || tab[ld][cd-1] == 19 || tab[ld-1][cd-1] == 19 || tab[ld-1][cd] == 19 || tab[ld-1][cd+1] == 19)
+    int sapproche = roisapproche(tab, -1, ld, cd);
+    if(sapproche == 1)
     {
         printf("\n\n Ce coup n'est pas legal \n"); //le roi ne peut pas s'approcher de l'autre roi
         return 0;
