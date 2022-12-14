@@ -94,7 +94,7 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
 {
     coup *c = NULL;
     int legal;
-    int ld, cd;
+    int ld, cd, sapproche;
 
     if(li+1 < 8)
     {
@@ -102,7 +102,8 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
         {
             ld = li+1;
             cd = ci;
-            if(tab[ld+1][cd+1] == 19 || tab[ld+1][cd] == 19 || tab[ld+1][cd-1] == 19 || tab[ld][cd+1] == 19 || tab[ld][cd-1] == 19 || tab[ld-1][cd-1] == 19 || tab[ld-1][cd] == 19 || tab[ld-1][cd+1] == 19)
+            sapproche = roisapproche(tab, -1, ld, cd);
+            if(sapproche == 1)
             {
                 legal = 0; // peut pas s'approcher du roi
             } else
@@ -125,9 +126,10 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
         {
             ld = li-1;
             cd = ci;
-            if(tab[ld+1][cd+1] == 19 || tab[ld+1][cd] == 19 || tab[ld+1][cd-1] == 19 || tab[ld][cd+1] == 19 || tab[ld][cd-1] == 19 || tab[ld-1][cd-1] == 19 || tab[ld-1][cd] == 19 || tab[ld-1][cd+1] == 19)
+            sapproche = roisapproche(tab, -1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -148,9 +150,10 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
         {
             ld = li;
             cd = ci-1;
-            if(tab[ld+1][cd+1] == 19 || tab[ld+1][cd] == 19 || tab[ld+1][cd-1] == 19 || tab[ld][cd+1] == 19 || tab[ld][cd-1] == 19 || tab[ld-1][cd-1] == 19 || tab[ld-1][cd] == 19 || tab[ld-1][cd+1] == 19)
+            sapproche = roisapproche(tab, -1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -171,9 +174,10 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
         {
             ld = li;
             cd = ci+1;
-            if(tab[ld+1][cd+1] == 19 || tab[ld+1][cd] == 19 || tab[ld+1][cd-1] == 19 || tab[ld][cd+1] == 19 || tab[ld][cd-1] == 19 || tab[ld-1][cd-1] == 19 || tab[ld-1][cd] == 19 || tab[ld-1][cd+1] == 19)
+            sapproche = roisapproche(tab, -1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -194,9 +198,10 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
         {
             ld = li-1;
             cd = ci-1;
-            if(tab[ld+1][cd+1] == 19 || tab[ld+1][cd] == 19 || tab[ld+1][cd-1] == 19 || tab[ld][cd+1] == 19 || tab[ld][cd-1] == 19 || tab[ld-1][cd-1] == 19 || tab[ld-1][cd] == 19 || tab[ld-1][cd+1] == 19)
+            sapproche = roisapproche(tab, -1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -217,9 +222,10 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
         {
             ld = li+1;
             cd = ci-1;
-            if(tab[ld+1][cd+1] == 19 || tab[ld+1][cd] == 19 || tab[ld+1][cd-1] == 19 || tab[ld][cd+1] == 19 || tab[ld][cd-1] == 19 || tab[ld-1][cd-1] == 19 || tab[ld-1][cd] == 19 || tab[ld-1][cd+1] == 19)
+            sapproche = roisapproche(tab, -1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -240,9 +246,10 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
         {
             ld = li+1;
             cd = ci+1;
-            if(tab[ld+1][cd+1] == 19 || tab[ld+1][cd] == 19 || tab[ld+1][cd-1] == 19 || tab[ld][cd+1] == 19 || tab[ld][cd-1] == 19 || tab[ld-1][cd-1] == 19 || tab[ld-1][cd] == 19 || tab[ld-1][cd+1] == 19)
+            sapproche = roisapproche(tab, -1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -264,9 +271,10 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
         {
             ld = li-1;
             cd = ci+1;
-                if(tab[ld+1][cd+1] == 19 || tab[ld+1][cd] == 19 || tab[ld+1][cd-1] == 19 || tab[ld][cd+1] == 19 || tab[ld][cd-1] == 19 || tab[ld-1][cd-1] == 19 || tab[ld-1][cd] == 19 || tab[ld-1][cd+1] == 19)
+            sapproche = roisapproche(tab, -1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -287,7 +295,7 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
 {
     coup *c = NULL;
     int legal;
-    int ld, cd;
+    int ld, cd, sapproche;
 
 
     if(li+1 < 8)
@@ -296,7 +304,8 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
         {
             ld = li+1;
             cd = ci;
-            if(tab[ld+1][cd+1] == -19 || tab[ld+1][cd] == -19 || tab[ld+1][cd-1] == -19 || tab[ld][cd+1] == -19 || tab[ld][cd-1] == -19 || tab[ld-1][cd-1] == -19 || tab[ld-1][cd] == -19 || tab[ld-1][cd+1] == -19)
+            sapproche = roisapproche(tab, 1, ld, cd);
+            if(sapproche == 1)
             {
                 legal = 0; // peut pas s'approcher du roi
             } else
@@ -319,9 +328,10 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
         {
             ld = li-1;
             cd = ci;
-            if(tab[ld+1][cd+1] == -19 || tab[ld+1][cd] == -19 || tab[ld+1][cd-1] == -19 || tab[ld][cd+1] == -19 || tab[ld][cd-1] == -19 || tab[ld-1][cd-1] == -19 || tab[ld-1][cd] == -19 || tab[ld-1][cd+1] == -19)
+            sapproche = roisapproche(tab, 1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -342,9 +352,10 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
         {
             ld = li;
             cd = ci-1;
-            if(tab[ld+1][cd+1] == -19 || tab[ld+1][cd] == -19 || tab[ld+1][cd-1] == -19 || tab[ld][cd+1] == -19 || tab[ld][cd-1] == -19 || tab[ld-1][cd-1] == -19 || tab[ld-1][cd] == -19 || tab[ld-1][cd+1] == -19)
+            sapproche = roisapproche(tab, 1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -365,9 +376,10 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
         {
             ld = li;
             cd = ci+1;
-            if(tab[ld+1][cd+1] == -19 || tab[ld+1][cd] == -19 || tab[ld+1][cd-1] == -19 || tab[ld][cd+1] == -19 || tab[ld][cd-1] == -19 || tab[ld-1][cd-1] == -19 || tab[ld-1][cd] == -19 || tab[ld-1][cd+1] == -19)
+            sapproche = roisapproche(tab, 1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -388,9 +400,10 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
         {
             ld = li-1;
             cd = ci-1;
-            if(tab[ld+1][cd+1] == -19 || tab[ld+1][cd] == -19 || tab[ld+1][cd-1] == -19 || tab[ld][cd+1] == -19 || tab[ld][cd-1] == -19 || tab[ld-1][cd-1] == -19 || tab[ld-1][cd] == -19 || tab[ld-1][cd+1] == -19)
+            sapproche = roisapproche(tab, 1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -411,9 +424,10 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
         {
             ld = li+1;
             cd = ci-1;
-            if(tab[ld+1][cd+1] == -19 || tab[ld+1][cd] == -19 || tab[ld+1][cd-1] == -19 || tab[ld][cd+1] == -19 || tab[ld][cd-1] == -19 || tab[ld-1][cd-1] == -19 || tab[ld-1][cd] == -19 || tab[ld-1][cd+1] == -19)
+            sapproche = roisapproche(tab, 1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -434,9 +448,10 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
         {
             ld = li+1;
             cd = ci+1;
-            if(tab[ld+1][cd+1] == -19 || tab[ld+1][cd] == -19 || tab[ld+1][cd-1] == -19 || tab[ld][cd+1] == -19 || tab[ld][cd-1] == -19 || tab[ld-1][cd-1] == -19 || tab[ld-1][cd] == -19 || tab[ld-1][cd+1] == -19)
+            sapproche = roisapproche(tab, 1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -458,9 +473,10 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
         {
             ld = li-1;
             cd = ci+1;
-                if(tab[ld+1][cd+1] == -19 || tab[ld+1][cd] == -19 || tab[ld+1][cd-1] == -19 || tab[ld][cd+1] == -19 || tab[ld][cd-1] == -19 || tab[ld-1][cd-1] == -19 || tab[ld-1][cd] == -19 || tab[ld-1][cd+1] == -19)
+            sapproche = roisapproche(tab, 1, ld, cd);
+            if(sapproche == 1)
             {
-                legal = 0;
+                legal = 0; // peut pas s'approcher du roi
             } else
             {
                 c = creationcoup(li, ci, ld, cd);
@@ -512,7 +528,7 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             }
         }
     }
-    if(tour == 1 && li+i < 7)
+    if(tour == 1 && li+i <= 7)
     {
         if(tab[li+i][ci] < 0)
         {
@@ -525,7 +541,7 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             }
             recopietab(tab, copietab);
         }
-    } else if(tour == -1 && li+i < 7)
+    } else if(tour == -1 && li+i <= 7)
     {
         if(tab[li+i][ci] > 0)
         {
@@ -572,7 +588,7 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             }
         }
     }
-    if(tour == 1 && li-i > 0)
+    if(tour == 1 && li-i >= 0)
     {
         if(tab[li-i][ci] < 0)
         {
@@ -585,7 +601,7 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             }
             recopietab(tab, copietab);
         }
-    } else if(tour == -1 && li-i > 0)
+    } else if(tour == -1 && li-i >= 0)
     {
         if(tab[li-i][ci] > 0)
         {
@@ -632,7 +648,7 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             }
         }
     }
-    if(tour == 1 && ci+i < 7)
+    if(tour == 1 && ci+i <= 7)
     {
         if(tab[li][ci+i] < 0)
         {
@@ -645,7 +661,7 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             }
             recopietab(tab, copietab);
         }
-    } else if(tour == -1 && ci+i < 7)
+    } else if(tour == -1 && ci+i <= 7)
     {
         if(tab[li][ci+i] > 0)
         {
@@ -693,7 +709,7 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
         }
     }
 
-    if(tour == 1 && ci-i > 0)
+    if(tour == 1 && ci-i >= 0)
     {
         if(tab[li][ci-i] < 0)
         {
@@ -706,7 +722,7 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             }
             recopietab(tab, copietab);
         }
-    } else if(tour == -1 && ci-i > 0)
+    } else if(tour == -1 && ci-i >= 0)
     {
         if(tab[li][ci-i] > 0)
         {
@@ -742,8 +758,7 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                     liste = ajoutefrere(liste, c);
                 }
                 recopietab(tab, copietab);
-            }
-            if(tour == -1 && tab[li+2][ci+1] > -1)
+            } else if(tour == -1 && tab[li+2][ci+1] > -1)
             {
                 c = creationcoup(li, ci, li+2, ci+1);
                 changetabcoup(copietab, li, ci, li+2, ci+1, -4);
@@ -767,8 +782,7 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                     liste = ajoutefrere(liste, c);
                 }
                 recopietab(tab, copietab);
-            }
-            if(tour == -1 && tab[li+2][ci-1] > -1)
+            } else if(tour == -1 && tab[li+2][ci-1] > -1)
             {
                 c = creationcoup(li, ci, li+2, ci-1);
                 changetabcoup(copietab, li, ci, li+2, ci-1, -4);
@@ -796,8 +810,7 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                     liste = ajoutefrere(liste, c);
                 }
                 recopietab(tab, copietab);
-            }
-            if(tour == -1 && tab[li-2][ci+1] > -1)
+            } else if(tour == -1 && tab[li-2][ci+1] > -1)
             {
                 c = creationcoup(li, ci, li-2, ci+1);
                 changetabcoup(copietab, li, ci, li-2, ci+1, -4);
@@ -821,8 +834,7 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                     liste = ajoutefrere(liste, c);
                 }
                 recopietab(tab, copietab);
-            }
-            if(tour == -1 && tab[li-2][ci-1] > -1)
+            } else if(tour == -1 && tab[li-2][ci-1] > -1)
             {
                 c = creationcoup(li, ci, li-2, ci-1);
                 changetabcoup(copietab, li, ci, li-2, ci-1, -4);
@@ -850,8 +862,7 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                     liste = ajoutefrere(liste, c);
                 }
                 recopietab(tab, copietab);
-            }
-            if(tour == -1 && tab[li+1][ci+2] > -1)
+            } else if(tour == -1 && tab[li+1][ci+2] > -1)
             {
                 c = creationcoup(li, ci, li+1, ci+2);
                 changetabcoup(copietab, li, ci, li+1, ci+2, -4);
@@ -875,8 +886,7 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                     liste = ajoutefrere(liste, c);
                 }
                 recopietab(tab, copietab);
-            }
-            if(tour == -1 && tab[li+1][ci-2] > -1)
+            } else if(tour == -1 && tab[li+1][ci-2] > -1)
             {
                 c = creationcoup(li, ci, li+1, ci-2);
                 changetabcoup(copietab, li, ci, li+1, ci-2, -4);
@@ -905,8 +915,7 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                     liste = ajoutefrere(liste, c);
                 }
                 recopietab(tab, copietab);
-            }
-            if(tour == -1 && tab[li-1][ci+2] > -1)
+            } else if(tour == -1 && tab[li-1][ci+2] > -1)
             {
                 c = creationcoup(li, ci, li-1, ci+2);
                 changetabcoup(copietab, li, ci, li-1, ci+2, -4);
@@ -930,8 +939,7 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                     liste = ajoutefrere(liste, c);
                 }
                 recopietab(tab, copietab);
-            }
-            if(tour == -1 && tab[li-2][ci-2] > -1)
+            } else if(tour == -1 && tab[li-2][ci-2] > -1)
             {
                 c = creationcoup(li, ci, li-1, ci-2);
                 changetabcoup(copietab, li, ci, li-1, ci-2, -4);
@@ -980,7 +988,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             }
         }
     }
-    if(tour == 1 && li+i < 7 && ci+j < 7)
+    if(tour == 1 && li+i <= 7 && ci+j <= 7)
     {
         if(tab[li+i][ci+j] < 0)
         {
@@ -993,7 +1001,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             }
             recopietab(tab, copietab);
         }
-    } else if(tour == -1 && li+i < 7 && ci+j < 7)
+    } else if(tour == -1 && li+i <= 7 && ci+j <= 7)
     {
         if(tab[li+i][ci+j] > 0)
         {
@@ -1042,7 +1050,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             }
         }
     }
-    if(tour == 1 && li-i > 0 && ci-j > 0)
+    if(tour == 1 && li-i >= 0 && ci-j >= 0)
     {
         if(tab[li-i][ci-j] < 0)
         {
@@ -1055,7 +1063,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             }
             recopietab(tab, copietab);
         }
-    } else if(tour == -1 && li-i > 0 && ci-j > 0)
+    } else if(tour == -1 && li-i >= 0 && ci-j >= 0)
     {
         if(tab[li-i][ci-j] > 0)
         {
@@ -1105,7 +1113,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
         }
     }
 
-    if(tour == 1 && li-i > 0 && ci+j < 7)
+    if(tour == 1 && li-i >= 0 && ci+j <= 7)
     {
         if(tab[li-i][ci+j] < 0)
         {
@@ -1118,7 +1126,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             }
             recopietab(tab, copietab);
         }
-    } else if(tour == -1 && li-i > 0 && ci+j < 7)
+    } else if(tour == -1 && li-i >= 0 && ci+j <= 7)
     {
         if(tab[li-i][ci+j] > 0)
         {
@@ -1165,7 +1173,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             }
         }
     }
-    if(tour == 1 && li+i < 7 && ci-j > 0)
+    if(tour == 1 && li+i <= 7 && ci-j >= 0)
     {
         if(tab[li+i][ci-j] < 0)
         {
@@ -1178,7 +1186,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             }
             recopietab(tab, copietab);
         }
-    } else if(tour == -1 && li+i < 7 && ci-j > 0)
+    } else if(tour == -1 && li+i <= 7 && ci-j >= 0)
     {
         if(tab[li+i][ci-j] > 0)
         {
@@ -1466,7 +1474,7 @@ int minimax(int depth, int turn, int tab[][8], int copietab[][8], int alpha, int
 void tourIA(int tab[][8])
 {
     coup *liste = NULL;
-    liste = creationcoup(0, 0, 0, 0);
+    //liste = creationcoup(0, 0, 0, 0);
     creationlistecoup(tab, 1, liste);
 
     affichagelistecoups(liste);
