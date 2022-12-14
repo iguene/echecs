@@ -7,6 +7,7 @@ void affichageplateau(int tab[][8]);
 void aide();
 
 int roc_ok_ou_pas(int n);
+int roisapproche(int tab[][8], int tour, int ld, int cd);
 
 int verifpionechec(int tab[][8], int n, int m);
 int verifcavalierechec(int tab[][8], int n, int m);
@@ -25,4 +26,3 @@ int verifechecnoir(int tab[][8]);
 
 
 #endif // ARBITRE_H_INCLUDED
-
