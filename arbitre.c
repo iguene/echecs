@@ -114,6 +114,81 @@ int roc_ok_ou_pas(int n)
     return 0;
 }
 
+int roisapproche(int tab[][8], int tour, int ld, int cd) // retourne 1 si le roi est trop proche du roi adverse et 0 sinon
+{
+    int roiadverse;
+    if(tour == 1)
+    {
+        roiadverse = -19;
+    } else
+    {
+        roiadverse = 19;
+    }
+
+    if(ld+1 < 8)
+    {
+        if(tab[ld+1][cd] == roiadverse)
+        {
+            return 1;
+        }
+        if(cd+1 < 8)
+        {
+            if(tab[ld+1][cd+1] == roiadverse)
+            {
+                return 1;
+            }
+        }
+        if(cd-1 >= 0)
+        {
+            if(tab[ld+1][cd-1] == roiadverse)
+            {
+                return 1;
+            }
+        }
+    }
+
+    if(ld < 8)
+    {
+        if(cd+1 < 8)
+        {
+            if(tab[ld][cd+1] == roiadverse)
+            {
+                return 1;
+            }
+        }
+        if(cd-1 >= 0)
+        {
+            if(tab[ld][cd-1] == roiadverse)
+            {
+                return 1;
+            }
+        }
+    }
+
+    if(ld-1 < 8)
+    {
+        if(tab[ld-1][cd] == roiadverse)
+        {
+            return 1;
+        }
+        if(cd+1 < 8)
+        {
+            if(tab[ld-1][cd+1] == roiadverse)
+            {
+                return 1;
+            }
+        }
+        if(cd-1 >= 0)
+        {
+            if(tab[ld-1][cd-1] == roiadverse)
+            {
+                return 1;
+            }
+        }
+    }
+
+    return 0;
+}
 
 
 int verifpionechec(int tab[][8], int n, int m)
