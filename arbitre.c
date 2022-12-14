@@ -216,52 +216,66 @@ int verifcavalierechec(int tab[][8], int n, int m)
 int veriftourechec(int tab[][8], int n, int m)
 {
     int i = 1;
-    while(tab[n][m+i] == 0 && m+i < 7)
+
+    if(m+1 < 7)
     {
-        i++;
-    }
-    if(tab[n][m+i] == 19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
+        while(tab[n][m+i] == 0 && m+i < 7)
+        {
+            i++;
+        }
+        if(tab[n][m+i] == 19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
-     while(tab[n][m-i] == 0 && m-i > 0)
+
+    if(m-1 > 0)
     {
-        i++;
-    }
-    if(tab[n][m-i] == 19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
+        while(tab[n][m-i] == 0 && m-i > 0)
+        {
+            i++;
+        }
+        if(tab[n][m-i] == 19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
-     while(tab[n+i][m] == 0 && n+i < 7)
+    if(n+1 < 7)
     {
-        i++;
-    }
-    if(tab[n+i][m] == 19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
+        while(tab[n+i][m] == 0 && n+i < 7)
+        {
+            i++;
+        }
+        if(tab[n+i][m] == 19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
-    while(tab[n-i][m] == 0 && n-i > 0)
+    if(n-1 > 0)
     {
-        i++;
-    }
-    if(tab[n-i][m] == 19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
+        while(tab[n-i][m] == 0 && n-i > 0)
+        {
+            i++;
+        }
+        if(tab[n-i][m] == 19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
     return 0; //la tour n'attaque pas le roi
@@ -270,61 +284,66 @@ int veriftourechec(int tab[][8], int n, int m)
 
 int veriffouechec(int tab[][8], int n, int m)
 {
-    int i = 1, j = 1;
-    while(tab[n+i][m+j] == 0 && n+i < 7 && m+j < 7)
+    int i = 1;
+
+    if(n+i < 7 && m+i < 7)
     {
-        i++;
-        j++;
-    }
-    if(tab[n+i][m+j] == 19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
-        j = 1;
+        while(tab[n+i][m+i] == 0 && n+i < 7 && m+i < 7)
+        {
+            i++;
+        }
+        if(tab[n+i][m+i] == 19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
-    while(tab[n+i][m-j] == 0 && n+i < 7 && m-j > 0)
+    if(n+i < 7 && m-i > 0)
     {
-        i++;
-        j++;
-    }
-    if(tab[n+i][m-j] == 19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
-        j = 1;
-    }
-
-    while(tab[n-i][m+j] == 0 && n-i > 0 && m+j < 7)
-    {
-        i++;
-        j++;
-    }
-    if(tab[n-i][m+j] == 19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
-        j = 1;
+        while(tab[n+i][m-i] == 0 && n+i < 7 && m-i > 0)
+        {
+            i++;
+        }
+        if(tab[n+i][m-i] == 19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
-    while(tab[n-i][m-j] == 0 && n-i > 0 && m-j > 0)
+    if(m+i < 7 && n-i > 0)
     {
-        i++;
-        j++;
+        while(tab[n-i][m+i] == 0 && n-i > 0 && m+i < 7)
+        {
+            i++;
+        }
+        if(tab[n-i][m+i] == 19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
-    if(tab[n-i][m-j] == 19)
+
+    if(n-i > 0 && m-i > 0)
     {
-        return 1;
-    } else
-    {
-        i = 1;
-        j = 1;
+        while(tab[n-i][m-i] == 0 && n-i > 0 && m-i > 0)
+        {
+            i++;
+        }
+        if(tab[n-i][m-i] == 19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
     return 0; //le fou ne mets pas le roi adverse en echec
@@ -493,115 +512,133 @@ int verifcavalierechecnoir(int tab[][8], int n, int m)
 int veriftourechecnoir(int tab[][8], int n, int m)
 {
     int i = 1;
-    while(tab[n][m+i] == 0 && m+i < 7)
+
+    if(m+1 < 7)
     {
-        i++;
-    }
-    if(tab[n][m+i] == -19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
+        while(tab[n][m+i] == 0 && m+i < 7)
+        {
+            i++;
+        }
+        if(tab[n][m+i] == -19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
-     while(tab[n][m-i] == 0 && m-i > 0)
+
+    if(m-1 > 0)
     {
-        i++;
-    }
-    if(tab[n][m-i] == -19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
+        while(tab[n][m-i] == 0 && m-i > 0)
+        {
+            i++;
+        }
+        if(tab[n][m-i] == -19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
-     while(tab[n+i][m] == 0 && n+i < 7)
+    if(n+1 < 7)
     {
-        i++;
-    }
-    if(tab[n+i][m] == -19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
-    }
-
-    while(tab[n-i][m] == 0 && n-i > 0)
-    {
-        i++;
-    }
-    if(tab[n-i][m] == -19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
+        while(tab[n+i][m] == 0 && n+i < 7)
+        {
+            i++;
+        }
+        if(tab[n+i][m] == -19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
+    if(n-1 > 0)
+    {
+        while(tab[n-i][m] == 0 && n-i > 0)
+        {
+            i++;
+        }
+        if(tab[n-i][m] == -19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
+    }
     return 0; //la tour n'attaque pas le roi
 
 }
 
 int veriffouechecnoir(int tab[][8], int n, int m)
 {
-    int i = 1, j = 1;
-    while(tab[n+i][m+j] == 0 && n+i < 7 && m+j < 7)
+    int i = 1;
+
+    if(n+i < 7 && m+i < 7)
     {
-        i++;
-        j++;
-    }
-    if(tab[n+i][m+j] == -19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
-        j = 1;
+        while(tab[n+i][m+i] == 0 && n+i < 7 && m+i < 7)
+        {
+            i++;
+        }
+        if(tab[n+i][m+i] == -19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
-    while(tab[n+i][m-j] == 0 && n+i < 7 && m-j > 0)
+    if(n+i < 7 && m-i > 0)
     {
-        i++;
-        j++;
-    }
-    if(tab[n+i][m-j] == -19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
-        j = 1;
-    }
-
-    while(tab[n-i][m+j] == 0 && n-i > 0 && m+j < 7)
-    {
-        i++;
-        j++;
-    }
-    if(tab[n-i][m+j] == -19)
-    {
-        return 1;
-    } else
-    {
-        i = 1;
-        j = 1;
+        while(tab[n+i][m-i] == 0 && n+i < 7 && m-i > 0)
+        {
+            i++;
+        }
+        if(tab[n+i][m-i] == -19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
-    while(tab[n-i][m-j] == 0 && n-i > 0 && m-j > 0)
+    if(m+i < 7 && n-i > 0)
     {
-        i++;
-        j++;
+        while(tab[n-i][m+i] == 0 && n-i > 0 && m+i < 7)
+        {
+            i++;
+        }
+        if(tab[n-i][m+i] == -19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
-    if(tab[n-i][m-j] == -19)
+
+    if(n-i > 0 && m-i > 0)
     {
-        return 1;
-    } else
-    {
-        i = 1;
-        j = 1;
+        while(tab[n-i][m-i] == 0 && n-i > 0 && m-i > 0)
+        {
+            i++;
+        }
+        if(tab[n-i][m-i] == -19)
+        {
+            return 1;
+        } else
+        {
+            i = 1;
+        }
     }
 
     return 0; //le fou ne mets pas le roi adverse en echec
