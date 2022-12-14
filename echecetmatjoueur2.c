@@ -1,12 +1,13 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "joueur.h"
 #include "adversaire.h"
 #include "arbitre.h"
 #include "echecmat.h"
-#include "echecetmatjoueur2.h"
 #include "joueur2.h"
+#include "echecetmatjoueur2.h"
+
+//verification de si les noirs sont en echec en mat
 
 int sortieecheccavaliernoir(int tab[][8], int copietab[][8], int n, int m)
 {
@@ -130,232 +131,355 @@ int sortieecheccavaliernoir(int tab[][8], int copietab[][8], int n, int m)
 
 int sortieechecreinenoir(int tab[][8], int copietab[][8], int i, int j)
 {
-    int v, b = 1; //b pour les boucles
+    int v, b = 1, bordure = 1; //b pour les boucles
 
-    while(tab[i][j+b] >= 0 && j+b < 7)
+    if(j+b < 8)
     {
-        copietab[i][j] = 0;
-        copietab[i][j+b] = -10;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        while(tab[i][j+b] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i][j+b] = -10;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(j+b == 8)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-     while(tab[i][j-b] >= 0 && j-b > 0)
+    bordure = 1;
+    if(j-b >= 0)
     {
-        copietab[i][j] = 0;
-        copietab[i][j-b] = -10;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+         while(tab[i][j-b] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i][j-b] = -10;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(j-b < 0)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-     while(tab[i+b][j] >= 0 && i+b < 7)
+    bordure = 1;
+    if(i+b < 8)
     {
-        copietab[i][j] = 0;
-        copietab[i+b][j] = -10;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+         while(tab[i+b][j] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i+b][j] = -10;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(i+b == 8)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-    while(tab[i-b][j] >= 0 && i-b > 0)
+    bordure = 1;
+    if(i-b >= 0)
     {
-        copietab[i][j] = 0;
-        copietab[i-b][j] = -10;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        while(tab[i-b][j] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i-b][j] = -10;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(i-b < 0)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-    while(tab[i][j+b] >= 0 && i+b < 7)
+    bordure = 1;
+    if(i+b < 8 && j+b < 8)
     {
-        copietab[i][j] = 0;
-        copietab[i][j+b] = -10;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        while(tab[i+b][j+b] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i+b][j+b] = -10;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(i+b == 8 || j+b == 8)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-     while(tab[i][j-b] >= 0 && i-b > 0)
+    bordure = 1;
+    if(i-b >= 0 && j-b >= 0)
     {
-        copietab[i][j] = 0;
-        copietab[i][j-b] = -10;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        while(tab[i-b][j-b] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i-b][j-b] = -10;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(i-b < 0 || j-b < 0)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-     while(tab[i+b][j] >= 0 && i+b < 7)
+    bordure = 1;
+    if(i-b >= 0 && j+b < 8)
     {
-        copietab[i][j] = 0;
-        copietab[i+b][j] = -10;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        while(tab[i-b][j+b] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i-b][j+b] = -10;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(i-b < 0 || j+b == 8)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-    while(tab[i-b][j] >= 0 && i-b > 0)
+    bordure = 1;
+    if(j-b >= 0 && i+b < 8)
     {
-        copietab[i][j] = 0;
-        copietab[i-b][j] = -10;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        while(tab[i+b][j-b] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i+b][j-b] = -10;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(j-b < 0 || i+b == 8)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
-    recopietab(tab, copietab);
+
     return 0; // cette reine ne permet pas de sortie de l'echec
 }
 
 int sortieechectournoir(int tab[][8], int copietab[][8], int i, int j)
 {
-    int v, b = 1; //b pour les boucles
+    int v, b = 1, bordure = 1; //b pour les boucles
 
-    while(tab[i][j+b] >= 0 && j+b < 7)
+    if(j+b < 8)
     {
-        copietab[i][j] = 0;
-        copietab[i][j+b] = -5;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        while(tab[i][j+b] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i][j+b] = -5;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(j+b == 8)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-     while(tab[i][j-b] >= 0 && j-b > 0)
+    bordure = 1;
+    if(j-b >= 0)
     {
-        copietab[i][j] = 0;
-        copietab[i][j-b] = -5;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+         while(tab[i][j-b] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i][j-b] = -5;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(j-b < 0)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-     while(tab[i+b][j] >= 0 && i+b < 7)
+    bordure = 1;
+    if(i+b < 8)
     {
-        copietab[i][j] = 0;
-        copietab[i+b][j] = -5;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+         while(tab[i+b][j] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i+b][j] = -5;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(i+b == 8)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-    while(tab[i-b][j] >= 0 && i-b > 0)
+    bordure = 1;
+    if(i-b >= 0)
     {
-        copietab[i][j] = 0;
-        copietab[i-b][j] = -5;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        while(tab[i-b][j] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i-b][j] = -5;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(i-b < 0)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
-    recopietab(tab, copietab);
     return 0; // cette tour ne permet pas de sortie de l'echec
 }
 
 
 int sortieechecfounoir(int tab[][8], int copietab[][8], int i, int j)
 {
-    int v, b = 1; //b pour les boucles
+    int v, b = 1, bordure = 1; //b pour les boucles
 
-    while(tab[i+b][j+b] >= 0 && i+b < 7 && j+b < 7)
+    if(i+b < 8 && j+b < 8)
     {
-        copietab[i][j] = 0;
-        copietab[i+b][j+b] = -3;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        while(tab[i+b][j+b] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i+b][j+b] = -3;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(i+b == 8 || j+b == 8)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-    while(tab[i+b][j-b] >= 0 && i+b < 7 && j-b > 0)
+    bordure = 1;
+    if(i-b >= 0 && j-b >= 0)
     {
-        copietab[i][j] = 0;
-        copietab[i+b][j-b] = -3;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        while(tab[i-b][j-b] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i-b][j-b] = -3;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(i-b < 0 || j-b < 0)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-    while(tab[i-b][j+b] >= 0 && i-b > 0 && j+b < 7)
+    bordure = 1;
+    if(i-b >= 0 && j+b < 8)
     {
-        copietab[i][j] = 0;
-        copietab[i-b][j+b] = -3;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        while(tab[i-b][j+b] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i-b][j+b] = -3;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(i-b < 0 || j+b == 8)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
     b = 1;
-    while(tab[i-b][j-b] >= 0 && i-b > 0 && j-b > 0)
+    bordure = 1;
+    if(j-b >= 0 && i+b < 8)
     {
-        copietab[i][j] = 0;
-        copietab[i-b][j-b] = -3;
-        v = verifechecnoir(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        while(tab[i+b][j-b] >= 0 && bordure == 1)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i+b][j-b] = -3;
+            v = verifechecnoir(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
+            b++;
+            if(j-b < 0 || i+b == 8)
+            {
+                bordure = 0;
+            }
         }
-        recopietab(tab, copietab);
-        b++;
     }
 
-    recopietab(tab, copietab);
     return 0; // ce fou ne permet pas de sortie de l'echec
 }
 
