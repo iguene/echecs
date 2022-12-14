@@ -7,6 +7,11 @@
 #include "joueur2.h"
 #include "echecetmatjoueur2.h"
 
+
+const int max = 1000000;
+const int min = -1000000;
+
+
 //tente de réunir les conditions du minimax : faut faire une listes de tout les coups possible pour chaque joueur sur plusieurs profondeurs
 
 typedef struct coup
@@ -1413,7 +1418,7 @@ int eval(int tab[][8], int turn)
             ve = verifechecetmatnoir(tab);
             if (ve == 0)
             {
-                note = 500;
+                note = max;
             }
         }
     } else if(turn == -1)
@@ -1424,7 +1429,7 @@ int eval(int tab[][8], int turn)
             ve = verifechecetmat(tab);
             if (ve == 0)
             {
-                note = 500;
+                note = min;
             }
         }
     }
@@ -1440,26 +1445,20 @@ int minimax(int depth, int turn, int tab[][8], int copietab[][8], int alpha, int
     coup *liste = NULL;
     liste = creationcoup(0, 0, 0, 0);
     creationlistecoup(tab, 1, liste);
-
     recopietab(tab, copietab);
-
     if(depth == 0)
     {
         int resultat = eval(tab, turn);
         return resultat;
     }
-
     if(turn == -1)
     {
         v = 50000;
         while(liste != NULL)
         {
-
-
             liste = liste->frere;
         }
     }
-
     return;
 }
 */
