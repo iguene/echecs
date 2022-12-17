@@ -7,12 +7,11 @@
 #include "joueur2.h"
 #include "echecetmatjoueur2.h"
 
+//IA AVEC MINIMAX (fonction minimax en avant dernier)
+
 
 const int max = 1000000;
 const int min = -1000000;
-
-
-//tente de réunir les conditions du minimax : faut faire une listes de tout les coups possible pour chaque joueur sur plusieurs profondeurs
 
 typedef struct coup
 {
@@ -42,6 +41,8 @@ void changetabcoup(int tab[][8], int li, int ci, int ld, int cd, int valpiece)
 
 
 }
+
+//-------------------------------------- INTERFACE DE LA STRUCTURE COUP -----------------------------------------------------------------
 
 coup *creationcoup(int li, int ci, int ld, int cd)
 {
@@ -103,6 +104,26 @@ coup *ajoutefrere(coup *ainee, coup *cadet)
     ainee->frere = ajoutefrere(ainee->frere, cadet);
     return ainee;
 }
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+//----------------- Pour changer un tableau selon un coup et restaurer de le tableau au coup précédent pour le minimax------------------------------
+void demontagecoupdanstab(coup *c, int tab[][8])
+{
+    changetabcoup(tab, c->ld, c->cd, c->li , c->ci, tab[c->ld][c->cd]);
+}
+
+void montagecoupdanstab(coup *c, int tab[][8])
+{
+    changetabcoup(tab,c->li , c->ci, c->ld, c->cd, tab[c->li][c->ci]);
+}
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+//----------------- Ajouts de tout les coups possibles selon un echiquier donnée et le tour dans une liste pour le minimax---------------------------
 
 
 
@@ -1411,6 +1432,10 @@ void creationlistecoup(int tab[][8], int tour, coup *liste) //si tour == 1 alors
 }
 
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Fonction d'évalutation d'un échiquier pour le minimax
+
 int eval(int tab[][8], int turn)
 {
     int note = 0, valeur, i, j, v = 0, ve = 0;
@@ -1462,12 +1487,14 @@ int eval(int tab[][8], int turn)
     return note;
 }
 
+
 /*
 int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
 {
-   
+
 }
 */
+
 
 void tourIA(int tab[][8])
 {
