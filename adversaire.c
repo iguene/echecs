@@ -57,11 +57,27 @@ coup *creationcoup(int li, int ci, int ld, int cd)
 
 void affichagelistecoups(coup *l)
 {
-    printf("\n%d,%d ->%d,%d", l->li, l->ci, l->ld, l->cd);
-    if(l->frere != NULL)
+    if(l!= NULL)
     {
-        affichagelistecoups(l->frere);
+        printf("\n%d,%d -> %d,%d", l->li, l->ci, l->ld, l->cd);
+        return affichagelistecoups(l->frere);
     }
+}
+
+coup *suppression_tete(coup *l)
+{
+    if(l == NULL)
+    {
+        return NULL;
+    }
+    if(l->frere == NULL)
+    {
+        return NULL;
+    }
+    coup *l2;
+    l2 = l->frere;
+    free(l);
+    return l2;
 }
 
 void liberation_rec(coup *l)
@@ -1447,27 +1463,9 @@ int eval(int tab[][8], int turn)
 }
 
 /*
-int minimax(int profondeur, int tour, int tab[][8], int copietab[][8], int alpha, int beta)
+int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
 {
-    int v;
-    coup *liste = NULL;
-    liste = creationcoup(0, 0, 0, 0);
-    creationlistecoup(tab, 1, liste);
-    recopietab(tab, copietab);
-    if(profondeur == 0)
-    {
-        int resultat = eval(tab, tour);
-        return resultat;
-    }
-    if(tour == -1)
-    {
-        v = 50000;
-        while(liste != NULL)
-        {
-            liste = liste->frere;
-        }
-    }
-    return;
+   
 }
 */
 
@@ -1488,6 +1486,7 @@ void tourIA(int tab[][8])
     coup *liste = NULL;
     liste = creationcoup(0, 0, 0, 0);
     creationlistecoup(tab, 1, liste);
+    liste = suppression_tete(liste);
 
     affichagelistecoups(liste);
 
