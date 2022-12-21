@@ -1561,8 +1561,10 @@ int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
 
     coup *liste = NULL;
     liste = creationcoup(0, 0, 0, 0);
-    creationlistecoup(tab, 1, liste);
+    creationlistecoup(tab, tour, liste);
     liste = suppression_tete(liste);
+
+    coup *meilleurcoup;
 
     if(tour == 1)
     {
@@ -1573,15 +1575,20 @@ int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
             montagecoupdanstab(liste, tab);
             valeur = minimax(profondeur-1, -1, tab, alpha, beta);
             demontagecoupdanstab(liste, tab);
-            meilleurvaleur = plusgrand(meilleurvaleur, valeur);
-            alpha = plusgrand(alpha, valeur);
+
+            if(valeur < meilleurvaleur)
+            {
+                meilleurvaleur = valeur;
+                meilleurcoup = creationcoup(liste->li, liste->ci, liste ->ld, liste->cd);
+            }
+
+            alpha = pluspetit(alpha, valeur);
             if(beta <= alpha)
             {
                 break; //cut alpha beta pruning
             }
             liste = liste->frere;
         }
-        liberation_rec(liste);
         return meilleurvaleur;
     } else
     {
@@ -1592,15 +1599,18 @@ int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
             montagecoupdanstab(liste, tab);
             valeur = minimax(profondeur-1, 1, tab, alpha, beta);
             demontagecoupdanstab(liste, tab);
-            meilleurvaleur = pluspetit(meilleurvaleur, valeur);
-            alpha = pluspetit(alpha, valeur);
+            if(valeur > meilleurvaleur)
+            {
+                meilleurvaleur = valeur;
+                meilleurcoup = creationcoup(liste->li, liste->ci, liste ->ld, liste->cd);
+            }
+            alpha = plusgrand(alpha, valeur);
             if(beta <= alpha)
             {
                 break; //cut alpha beta pruning
             }
             liste = liste->frere;
         }
-        liberation_rec(liste);
         return meilleurvaleur;
     }
 
@@ -1628,3 +1638,4 @@ void tourIA(int tab[][8])
 
     //ici faudra appliquer le meilleur coup de l'ia sur l'échiquier puis renvoyer à tourjoueur
 }
+
