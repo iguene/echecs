@@ -6,14 +6,15 @@
 #include "echecmat.h"
 #include "joueur2.h"
 #include "echecetmatjoueur2.h"
+#include <limits.h>
 
 #define PRONFONDEURMAX 4
 
 //IA AVEC MINIMAX (fonction minimax en avant dernier)
 
 
-const int max = 1000000;
-const int min = -1000000;
+const int max = 100000;
+const int min = -100000;
 
 typedef struct coup
 {
@@ -128,30 +129,33 @@ void demontagecoupdanstab(coup *c, int tab[][8])
 
 //----------------- Verification qu'une position est en echec et mat en une fonction pour le minimax-------------------------------------------------
 
-int positionechecmat(int tab[][8])
+int positionechecmat(int tab[][8], int tour)
 {
     int v, ve;
-
-    v = verifechecnoir(tab);
-    if (v == 1)
+    if(tour == 1)
     {
+        v = verifechecnoir(tab);
+        if (v == 1)
+        {
             ve = verifechecetmatnoir(tab);
-    } else if(ve != 0)
+            if (ve == 0)
+            {
+                return 1;
+            }
+        }
+    } else if(tour == -1)
     {
         v = verifechec(tab);
         if (v == 1)
         {
             ve = verifechecetmat(tab);
+            if (ve == 0)
+            {
+                return 1;
+            }
         }
     }
-
-    if(ve == 0)
-    {
-        return 1; // position avec un echec et mat
-    } else
-    {
-        return 0; // pas d'echec et mat
-    }
+    return 0;
 }
 
 
@@ -1554,7 +1558,8 @@ int eval(int tab[][8], int tour)
 
 int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
 {
-    if(profondeur == 0 || positionechecmat(tab))
+    int a = positionechecmat(tab, tour);
+    if(profondeur == 0 || a == 1)
     {
         return eval(tab, tour);
     }
@@ -1633,7 +1638,7 @@ void tourIA(int tab[][8])
     }
 
     int a;
-    a = minimax(4, -1, tab, min, max);
+    a = minimax(4, -1, tab, INT_MIN, INT_MAX);
     printf("%d", a);
 
     //ici faudra appliquer le meilleur coup de l'ia sur l'échiquier puis renvoyer à tourjoueur
