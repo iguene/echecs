@@ -1638,4 +1638,3 @@ void tourIA(int tab[][8])
 
     //ici faudra appliquer le meilleur coup de l'ia sur l'échiquier puis renvoyer à tourjoueur
 }
-
