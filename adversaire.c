@@ -7,6 +7,8 @@
 #include "joueur2.h"
 #include "echecetmatjoueur2.h"
 
+#define PRONFONDEURMAX 4
+
 //IA AVEC MINIMAX (fonction minimax en avant dernier)
 
 
@@ -110,15 +112,76 @@ coup *ajoutefrere(coup *ainee, coup *cadet)
 
 
 //----------------- Pour changer un tableau selon un coup et restaurer de le tableau au coup précédent pour le minimax------------------------------
-void demontagecoupdanstab(coup *c, int tab[][8])
-{
-    changetabcoup(tab, c->ld, c->cd, c->li , c->ci, tab[c->ld][c->cd]);
-}
 
 void montagecoupdanstab(coup *c, int tab[][8])
 {
     changetabcoup(tab,c->li , c->ci, c->ld, c->cd, tab[c->li][c->ci]);
 }
+
+void demontagecoupdanstab(coup *c, int tab[][8])
+{
+    changetabcoup(tab, c->ld, c->cd, c->li , c->ci, tab[c->ld][c->cd]);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//----------------- Verification qu'une position est en echec et mat en une fonction pour le minimax-------------------------------------------------
+
+int positionechecmat(int tab[][8])
+{
+    int v, ve;
+
+    v = verifechecnoir(tab);
+    if (v == 1)
+    {
+            ve = verifechecetmatnoir(tab);
+    } else if(ve != 0)
+    {
+        v = verifechec(tab);
+        if (v == 1)
+        {
+            ve = verifechecetmat(tab);
+        }
+    }
+
+    if(ve == 0)
+    {
+        return 1; // position avec un echec et mat
+    } else
+    {
+        return 0; // pas d'echec et mat
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+//----------------- Donne le plus grand entier entre deux ou le plus petit entier entre deux pour le minimax ----------------------------------------
+
+int plusgrand(int a, int b)
+{
+    if(a < b)
+    {
+        return b;
+    } else
+    {
+        return a;
+    }
+}
+
+int pluspetit(int a, int b)
+{
+    if(a > b)
+    {
+        return b;
+    } else
+    {
+        return a;
+    }
+}
+
+
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -1436,7 +1499,7 @@ void creationlistecoup(int tab[][8], int tour, coup *liste) //si tour == 1 alors
 
 //Fonction d'évalutation d'un échiquier pour le minimax
 
-int eval(int tab[][8], int turn)
+int eval(int tab[][8], int tour)
 {
     int note = 0, valeur, i, j, v = 0, ve = 0;
 
@@ -1459,7 +1522,7 @@ int eval(int tab[][8], int turn)
         }
     }
 
-    if(turn == 1)
+    if(tour == 1)
     {
         v = verifechecnoir(tab);
         if (v == 1)
@@ -1470,7 +1533,7 @@ int eval(int tab[][8], int turn)
                 note = max;
             }
         }
-    } else if(turn == -1)
+    } else if(tour == -1)
     {
         v = verifechec(tab);
         if (v == 1)
@@ -1488,12 +1551,61 @@ int eval(int tab[][8], int turn)
 }
 
 
-/*
+
 int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
 {
+    if(profondeur == 0 || positionechecmat(tab))
+    {
+        return eval(tab, tour);
+    }
+
+    coup *liste = NULL;
+    liste = creationcoup(0, 0, 0, 0);
+    creationlistecoup(tab, 1, liste);
+    liste = suppression_tete(liste);
+
+    if(tour == 1)
+    {
+        int meilleurvaleur = min;
+        int valeur;
+        while(liste != NULL)
+        {
+            montagecoupdanstab(liste, tab);
+            valeur = minimax(profondeur-1, -1, tab, alpha, beta);
+            demontagecoupdanstab(liste, tab);
+            meilleurvaleur = plusgrand(meilleurvaleur, valeur);
+            alpha = plusgrand(alpha, valeur);
+            if(beta <= alpha)
+            {
+                break; //cut alpha beta pruning
+            }
+            liste = liste->frere;
+        }
+        liberation_rec(liste);
+        return meilleurvaleur;
+    } else
+    {
+        int meilleurvaleur = max;
+        int valeur;
+        while(liste != NULL)
+        {
+            montagecoupdanstab(liste, tab);
+            valeur = minimax(profondeur-1, 1, tab, alpha, beta);
+            demontagecoupdanstab(liste, tab);
+            meilleurvaleur = pluspetit(meilleurvaleur, valeur);
+            alpha = pluspetit(alpha, valeur);
+            if(beta <= alpha)
+            {
+                break; //cut alpha beta pruning
+            }
+            liste = liste->frere;
+        }
+        liberation_rec(liste);
+        return meilleurvaleur;
+    }
 
 }
-*/
+
 
 
 void tourIA(int tab[][8])
@@ -1510,14 +1622,9 @@ void tourIA(int tab[][8])
         }
     }
 
-    coup *liste = NULL;
-    liste = creationcoup(0, 0, 0, 0);
-    creationlistecoup(tab, 1, liste);
-    liste = suppression_tete(liste);
-
-    affichagelistecoups(liste);
-
-    liberation_rec(liste);
+    int a;
+    a = minimax(4, -1, tab, min, max);
+    printf("%d", a);
 
     //ici faudra appliquer le meilleur coup de l'ia sur l'échiquier puis renvoyer à tourjoueur
 }
