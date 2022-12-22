@@ -259,7 +259,7 @@ int verifcavalierechec(int tab[][8], int n, int m)
         }
         if(n+1 < 8)
         {
-            if(tab[n-1][m-2] == 19)
+            if(tab[n+1][m-2] == 19)
             {
                 return 1;
             }
@@ -555,7 +555,7 @@ int verifcavalierechecnoir(int tab[][8], int n, int m)
         }
         if(n+1 < 8)
         {
-            if(tab[n-1][m-2] == -19)
+            if(tab[n+1][m-2] == -19)
             {
                 return 1;
             }
