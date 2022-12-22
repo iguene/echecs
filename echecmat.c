@@ -486,16 +486,19 @@ int sortieechecfou(int tab[][8], int copietab[][8], int i, int j)
 int sortieechecpion(int tab[][8], int copietab[][8], int i, int j)
 {
     int v;
-    if(i == 6 && tab[i-2][j] == 0 && tab[i-1][j] == 0)
+    if(i == 6)
     {
-        copietab[i][j] = 0;
-        copietab[i-2][j] = 1;
-        v = verifechec(copietab);
-        if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+        if(tab[i-2][j] == 0 && tab[i-1][j] == 0)
         {
-            return 1; //couppossible = 1
+            copietab[i][j] = 0;
+            copietab[i-2][j] = 1;
+            v = verifechec(copietab);
+            if (v == 0) //si v == 0 alors le joueur n'est plus en echec, donc ce coup permet de ne pas être echec et mat
+            {
+                return 1; //couppossible = 1
+            }
+            recopietab(tab, copietab);
         }
-        recopietab(tab, copietab);
     }
 
     if(tab[i-1][j]==0)
@@ -542,11 +545,12 @@ int sortieechecpion(int tab[][8], int copietab[][8], int i, int j)
 
 int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
 {
-    int v;
+    int v, sapproche;
 
     if (i+1 < 8 && j+1 < 8)
     {
-        if(tab[i+1][j+1] < 1)
+        sapproche = roisapproche(tab, 1, i+1, j+1);
+        if(tab[i+1][j+1] < 1 && sapproche == 0)
         {
             copietab[i][j] = 0;
             copietab[i+1][j+1] = 19;
@@ -560,7 +564,8 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
     }
     if (i-1 >= 0 && j-1 >= 0)
     {
-        if(tab[i-1][j-1] < 1)
+        sapproche = roisapproche(tab, 1, i-1, j-1);
+        if(tab[i-1][j-1] < 1 && sapproche == 0)
         {
             copietab[i][j] = 0;
             copietab[i-1][j-1] = 19;
@@ -574,7 +579,8 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
     }
     if (i+1 < 8 && j-1 >= 0)
     {
-        if(tab[i+1][j-1] < 1)
+        sapproche = roisapproche(tab, 1, i+1, j-1);
+        if(tab[i+1][j-1] < 1 && sapproche == 0)
         {
             copietab[i][j] = 0;
             copietab[i+1][j-1] = 19;
@@ -588,7 +594,8 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
     }
     if (i-1 >= 0 && j+1 < 8)
     {
-        if(tab[i-1][j+1] < 1)
+        sapproche = roisapproche(tab, 1, i-1, j+1);
+        if(tab[i-1][j+1] < 1 && sapproche == 0)
         {
             copietab[i][j] = 0;
             copietab[i-1][j+1] = 19;
@@ -602,7 +609,8 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
     }
     if (j+1 < 8)
     {
-        if(tab[i][j+1] < 1)
+        sapproche = roisapproche(tab, 1, i, j+1);
+        if(tab[i][j+1] < 1 && sapproche == 0)
         {
             copietab[i][j] = 0;
             copietab[i][j+1] = 19;
@@ -616,7 +624,8 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
     }
     if (i+1 < 8)
     {
-        if(tab[i+1][j] < 1)
+        sapproche = roisapproche(tab, 1, i+1, j);
+        if(tab[i+1][j] < 1 && sapproche == 0)
         {
             copietab[i][j] = 0;
             copietab[i+1][j] = 19;
@@ -630,7 +639,8 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
     }
     if (i-1 >= 0)
     {
-        if(tab[i-1][j] < 1)
+        sapproche = roisapproche(tab, 1, i-1, j);
+        if(tab[i-1][j] < 1 && sapproche == 0)
         {
             copietab[i][j] = 0;
             copietab[i-1][j] = 19;
@@ -644,7 +654,8 @@ int sortieechecroi(int tab[][8], int copietab[][8], int i, int j)
     }
     if (j-1 >= 0)
     {
-        if(tab[i][j-1] < 1)
+        sapproche = roisapproche(tab, 1, i, j-1);
+        if(tab[i][j-1] < 1 && sapproche == 0)
         {
             copietab[i][j] = 0;
             copietab[i][j-1] = 19;
