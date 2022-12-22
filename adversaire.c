@@ -8,13 +8,11 @@
 #include "echecetmatjoueur2.h"
 #include <limits.h>
 
-#define PRONFONDEURMAX 4
+#define PRONFONDEURMAX 2
 
 //IA AVEC MINIMAX (fonction minimax en avant dernier)
 
 
-const int max = 100000;
-const int min = -100000;
 
 typedef struct coup
 {
@@ -1043,7 +1041,7 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                     liste = ajoutefrere(liste, c);
                 }
                 recopietab(tab, copietab);
-            } else if(tour == -1 && tab[li-2][ci-2] > -1)
+            } else if(tour == -1 && tab[li-1][ci-2] > -1)
             {
                 c = creationcoup(li, ci, li-1, ci-2);
                 changetabcoup(copietab, li, ci, li-1, ci-2, -4);
@@ -1311,7 +1309,7 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
 {
     coup *c = NULL;
     int legal;
-    if(tab[li+1][ci]==0)
+    if(tab[li+1][ci] == 0)
     {
         c = creationcoup(li, ci, li+1, ci);
         changetabcoup(copietab, li, ci, li+1, ci, -1);
@@ -1352,17 +1350,21 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
         }
     }
 
-    if(tab[li+1][ci] == 0 && tab[li+2][ci] == 0 && li == 1)
+    if(li == 1)
     {
-        c = creationcoup(li, ci, li+2, ci);
-        changetabcoup(copietab, li, ci, li+2, ci, -1);
-        legal = verifechec(copietab);
-        if(legal == 0)
+        if(tab[li+1][ci] == 0 && tab[li+2][ci] == 0 && li == 1)
         {
-            liste = ajoutefrere(liste, c);
+            c = creationcoup(li, ci, li+2, ci);
+            changetabcoup(copietab, li, ci, li+2, ci, -1);
+            legal = verifechec(copietab);
+            if(legal == 0)
+            {
+                liste = ajoutefrere(liste, c);
+            }
+            recopietab(tab, copietab);
         }
-        recopietab(tab, copietab);
     }
+
 }
 
 //ajout liste des coups possibles pour un pion blanc
@@ -1382,7 +1384,7 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
         recopietab(tab, copietab);
     }
 
-    if(ci-1 >= 8)
+    if(ci-1 >= 0)
     {
         if(tab[li-1][ci-1] < 0)
         {
@@ -1412,16 +1414,19 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
         }
     }
 
-    if(tab[li-1][ci] == 0 && tab[li-2][ci] == 0 && li == 6)
+    if(li == 6)
     {
-        c = creationcoup(li, ci, li-2, ci);
-        changetabcoup(copietab, li, ci, li-2, ci, 1);
-        legal = verifechec(copietab);
-        if(legal == 0)
+        if(tab[li-1][ci] == 0 && tab[li-2][ci] == 0)
         {
-            liste = ajoutefrere(liste, c);
+            c = creationcoup(li, ci, li-2, ci);
+            changetabcoup(copietab, li, ci, li-2, ci, 1);
+            legal = verifechec(copietab);
+            if(legal == 0)
+            {
+                liste = ajoutefrere(liste, c);
+            }
+            recopietab(tab, copietab);
         }
-        recopietab(tab, copietab);
     }
 
 }
@@ -1505,8 +1510,10 @@ void creationlistecoup(int tab[][8], int tour, coup *liste) //si tour == 1 alors
 
 int eval(int tab[][8], int tour)
 {
+
     int note = 0, valeur, i, j, v = 0, ve = 0;
 
+    // Ajoute des points selon les pièces présentes dans l'échiquier
     for(i = 0; i < 8; i++)
     {
         for(j = 0; j < 8; j++)
@@ -1522,19 +1529,91 @@ int eval(int tab[][8], int tour)
                 valeur = tab[i][j];
             }
 
-            note += valeur * 10; //*nbdeplacementpossible(tab, i, j);
+            note += valeur * 10;
         }
     }
+
+    //Ajoute des points si on a des pièces au centre de léchiquier
+
+    if(tab[3][3] > 0)
+    {
+        note += 3;
+    } else if (tab[3][3] < 0)
+    {
+        note -= 3;
+    }
+
+    if(tab[3][4] > 0)
+    {
+        note += 3;
+    } else if (tab[3][4] < 0)
+    {
+        note -= 3;
+    }
+
+    if(tab[4][3] > 0)
+    {
+        note += 3;
+    } else if (tab[4][3] < 0)
+    {
+        note -= 3;
+    }
+
+    if(tab[4][4] > 0)
+    {
+        note += 3;
+    } else if (tab[4][4] < 0)
+    {
+        note -= 3;
+    }
+
+    //Ajoute des points selon le nombre de coups possibles pour un echiquier
+
+    int compteur = 0;;
+    coup *liste = NULL;
+    coup *c;
+    liste = creationcoup(0, 0, 0, 0);
+    creationlistecoup(tab, 1, liste);
+    liste = suppression_tete(liste);
+    c = liste;
+
+    while(c != NULL)
+    {
+        compteur++;
+        c = c->frere;
+    }
+
+    liberation_rec(liste);
+    note += compteur;
+
+    compteur = 0;
+    liste = creationcoup(0, 0, 0, 0);
+    creationlistecoup(tab, -1, liste);
+    liste = suppression_tete(liste);
+    c = liste;
+
+    while(c != NULL)
+    {
+        compteur++;
+        c = c->frere;
+    }
+
+    liberation_rec(liste);
+    note -= compteur;
+
+
+    //Donne une une très très grande note si l'adversaire est mat ou ajoute quelques points si il est simplement en echec
 
     if(tour == 1)
     {
         v = verifechecnoir(tab);
         if (v == 1)
         {
+            note -= 2;
             ve = verifechecetmatnoir(tab);
             if (ve == 0)
             {
-                note = max;
+                note = 100000;
             }
         }
     } else if(tour == -1)
@@ -1542,10 +1621,11 @@ int eval(int tab[][8], int tour)
         v = verifechec(tab);
         if (v == 1)
         {
+            note += 2;
             ve = verifechecetmat(tab);
             if (ve == 0)
             {
-                note = min;
+                note = -100000;
             }
         }
     }
@@ -1554,6 +1634,7 @@ int eval(int tab[][8], int tour)
     return note;
 }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
@@ -1561,7 +1642,8 @@ int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
     int a = positionechecmat(tab, tour);
     if(profondeur == 0 || a == 1)
     {
-        return eval(tab, tour);
+        int e = eval(tab, tour);
+        return e;
     }
 
     coup *liste = NULL;
@@ -1569,56 +1651,82 @@ int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
     creationlistecoup(tab, tour, liste);
     liste = suppression_tete(liste);
 
-    coup *meilleurcoup;
+    coup *c;
+    c = liste;
 
-    if(tour == 1)
+
+    int evaluation;
+    int meilleurvaleur;
+
+    if(tour == 1) // maximisation
     {
-        int meilleurvaleur = min;
-        int valeur;
-        while(liste != NULL)
+        meilleurvaleur = INT_MIN;
+        while(c != NULL)
         {
-            montagecoupdanstab(liste, tab);
-            valeur = minimax(profondeur-1, -1, tab, alpha, beta);
-            demontagecoupdanstab(liste, tab);
+            montagecoupdanstab(c, tab);
+            evaluation = minimax(profondeur-1, -1, tab, alpha, beta);
+            demontagecoupdanstab(c, tab);
 
-            if(valeur < meilleurvaleur)
+            if(evaluation > meilleurvaleur)
             {
-                meilleurvaleur = valeur;
-                meilleurcoup = creationcoup(liste->li, liste->ci, liste ->ld, liste->cd);
+                meilleurvaleur = evaluation;
+                /*if(profondeur == PRONFONDEURMAX)
+                {
+                    meilleurcoup->li = c->li;
+                    meilleurcoup->ci = c->ci;
+                    meilleurcoup->ld = c->ld;
+                    meilleurcoup->cd = c->cd;
+                }
+                */
             }
 
-            alpha = pluspetit(alpha, valeur);
+            alpha = plusgrand(alpha, evaluation);
             if(beta <= alpha)
             {
                 break; //cut alpha beta pruning
             }
-            liste = liste->frere;
+
+            c = c->frere;
         }
-        return meilleurvaleur;
-    } else
+        liberation_rec(liste);
+
+
+    } else //minimisation
     {
-        int meilleurvaleur = max;
-        int valeur;
-        while(liste != NULL)
+        meilleurvaleur = INT_MAX;
+        while(c != NULL)
         {
-            montagecoupdanstab(liste, tab);
-            valeur = minimax(profondeur-1, 1, tab, alpha, beta);
-            demontagecoupdanstab(liste, tab);
-            if(valeur > meilleurvaleur)
+            montagecoupdanstab(c, tab);
+            evaluation = minimax(profondeur-1, 1, tab, alpha, beta);
+            demontagecoupdanstab(c, tab);
+
+            if(evaluation < meilleurvaleur)
             {
-                meilleurvaleur = valeur;
-                meilleurcoup = creationcoup(liste->li, liste->ci, liste ->ld, liste->cd);
+                meilleurvaleur = evaluation;
+                /*if(profondeur == PRONFONDEURMAX)
+                {
+                    meilleurcoup->li = c->li;
+                    meilleurcoup->ci = c->ci;
+                    meilleurcoup->ld = c->ld;
+                    meilleurcoup->cd = c->cd;
+                }
+                */
             }
-            alpha = plusgrand(alpha, valeur);
+
+            beta = pluspetit(alpha, evaluation);
             if(beta <= alpha)
             {
                 break; //cut alpha beta pruning
             }
-            liste = liste->frere;
+
+            c = c->frere;
         }
-        return meilleurvaleur;
+        liberation_rec(liste);
+
+
     }
 
+    return meilleurvaleur;
 }
 
 
@@ -1627,19 +1735,57 @@ void tourIA(int tab[][8])
 {
     //D'abord vérifier si la partie n'est pas déjà en echec et mat
     int v, ve;
-    v = verifechec(tab);
+    v = verifechecnoir(tab);
     if (v == 1)
     {
-        ve = verifechecetmat(tab);
+        ve = verifechecetmatnoir(tab);
         if (ve == 0)
         {
             return printf("\n\n Victoire des blancs par echec et mat ! \n\n ");
         }
     }
 
-    int a;
-    a = minimax(4, -1, tab, INT_MIN, INT_MAX);
-    printf("%d", a);
 
-    //ici faudra appliquer le meilleur coup de l'ia sur l'échiquier puis renvoyer à tourjoueur
+    coup *meilleurcoup = creationcoup(0, 0, 0, 0);
+    coup *liste = creationcoup(0, 0, 0, 0);
+    creationlistecoup(tab, -1, liste);
+    liste = suppression_tete(liste);
+    coup *c = liste;
+
+    int resultat, meilleurresultat = INT_MAX;
+
+
+    while(c != NULL)
+    {
+        montagecoupdanstab(c, tab);
+        resultat = minimax(PRONFONDEURMAX-1, 1, tab, INT_MIN, INT_MAX);
+        demontagecoupdanstab(c, tab);
+
+
+        if(resultat < meilleurresultat)
+        {
+            meilleurresultat = resultat;
+            meilleurcoup->li = c->li;
+            meilleurcoup->ci = c->ci;
+            meilleurcoup->ld = c->ld;
+            meilleurcoup->cd = c->cd;
+        }
+        c = c->frere;
+
+    }
+
+    liberation_rec(liste);
+
+
+    printf("\n %d", meilleurresultat);
+    printf("\n Le meilleur coup est : %d, %d, %d, %d", meilleurcoup->li, meilleurcoup->ci ,meilleurcoup->ld , meilleurcoup->cd);
+
+
+
+    montagecoupdanstab(meilleurcoup, tab);
+
+    tourjoueur(tab);
+
+
+
 }
