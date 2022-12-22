@@ -292,7 +292,7 @@ int veriftourechec(int tab[][8], int n, int m)
 {
     int i = 1;
 
-    if(m+1 < 7)
+    if(m+1 <= 7)
     {
         while(tab[n][m+i] == 0 && m+i < 7)
         {
@@ -308,7 +308,7 @@ int veriftourechec(int tab[][8], int n, int m)
     }
 
 
-    if(m-1 > 0)
+    if(m-1 >= 0)
     {
         while(tab[n][m-i] == 0 && m-i > 0)
         {
@@ -323,7 +323,7 @@ int veriftourechec(int tab[][8], int n, int m)
         }
     }
 
-    if(n+1 < 7)
+    if(n+1 <= 7)
     {
         while(tab[n+i][m] == 0 && n+i < 7)
         {
@@ -338,7 +338,7 @@ int veriftourechec(int tab[][8], int n, int m)
         }
     }
 
-    if(n-1 > 0)
+    if(n-1 >= 0)
     {
         while(tab[n-i][m] == 0 && n-i > 0)
         {
@@ -361,7 +361,7 @@ int veriffouechec(int tab[][8], int n, int m)
 {
     int i = 1;
 
-    if(n+i < 7 && m+i < 7)
+    if(n+i <= 7 && m+i <= 7)
     {
         while(tab[n+i][m+i] == 0 && n+i < 7 && m+i < 7)
         {
@@ -376,7 +376,7 @@ int veriffouechec(int tab[][8], int n, int m)
         }
     }
 
-    if(n+i < 7 && m-i > 0)
+    if(n+i <= 7 && m-i >= 0)
     {
         while(tab[n+i][m-i] == 0 && n+i < 7 && m-i > 0)
         {
@@ -391,7 +391,7 @@ int veriffouechec(int tab[][8], int n, int m)
         }
     }
 
-    if(m+i < 7 && n-i > 0)
+    if(m+i <= 7 && n-i >= 0)
     {
         while(tab[n-i][m+i] == 0 && n-i > 0 && m+i < 7)
         {
@@ -406,7 +406,7 @@ int veriffouechec(int tab[][8], int n, int m)
         }
     }
 
-    if(n-i > 0 && m-i > 0)
+    if(n-i >= 0 && m-i >= 0)
     {
         while(tab[n-i][m-i] == 0 && n-i > 0 && m-i > 0)
         {
@@ -588,7 +588,7 @@ int veriftourechecnoir(int tab[][8], int n, int m)
 {
     int i = 1;
 
-    if(m+1 < 7)
+    if(m+1 <= 7)
     {
         while(tab[n][m+i] == 0 && m+i < 7)
         {
@@ -604,7 +604,7 @@ int veriftourechecnoir(int tab[][8], int n, int m)
     }
 
 
-    if(m-1 > 0)
+    if(m-1 >= 0)
     {
         while(tab[n][m-i] == 0 && m-i > 0)
         {
@@ -619,7 +619,7 @@ int veriftourechecnoir(int tab[][8], int n, int m)
         }
     }
 
-    if(n+1 < 7)
+    if(n+1 <= 7)
     {
         while(tab[n+i][m] == 0 && n+i < 7)
         {
@@ -634,7 +634,7 @@ int veriftourechecnoir(int tab[][8], int n, int m)
         }
     }
 
-    if(n-1 > 0)
+    if(n-1 >= 0)
     {
         while(tab[n-i][m] == 0 && n-i > 0)
         {
@@ -656,7 +656,7 @@ int veriffouechecnoir(int tab[][8], int n, int m)
 {
     int i = 1;
 
-    if(n+i < 7 && m+i < 7)
+    if(n+i <= 7 && m+i <= 7)
     {
         while(tab[n+i][m+i] == 0 && n+i < 7 && m+i < 7)
         {
@@ -671,7 +671,7 @@ int veriffouechecnoir(int tab[][8], int n, int m)
         }
     }
 
-    if(n+i < 7 && m-i > 0)
+    if(n+i <= 7 && m-i >= 0)
     {
         while(tab[n+i][m-i] == 0 && n+i < 7 && m-i > 0)
         {
@@ -686,7 +686,7 @@ int veriffouechecnoir(int tab[][8], int n, int m)
         }
     }
 
-    if(m+i < 7 && n-i > 0)
+    if(m+i <= 7 && n-i >= 0)
     {
         while(tab[n-i][m+i] == 0 && n-i > 0 && m+i < 7)
         {
@@ -701,7 +701,7 @@ int veriffouechecnoir(int tab[][8], int n, int m)
         }
     }
 
-    if(n-i > 0 && m-i > 0)
+    if(n-i >= 0 && m-i >= 0)
     {
         while(tab[n-i][m-i] == 0 && n-i > 0 && m-i > 0)
         {
