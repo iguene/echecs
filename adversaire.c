@@ -40,7 +40,6 @@ void changetabcoup(int tab[][8], int li, int ci, int ld, int cd, int valpiece)
         tab[ld][cd] = valpiece;
     }
 
-
 }
 
 //-------------------------------------- INTERFACE DE LA STRUCTURE COUP -----------------------------------------------------------------
@@ -520,7 +519,7 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
         }
     }
 
-    if(li+1 < 8 && ci-1 >=0)
+    if(li+1 < 8 && ci-1 >= 0)
     {
         if(tab[li+1][ci-1] < 1)
         {
@@ -838,6 +837,7 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             recopietab(tab, copietab);
         }
     }
+    recopietab(tab, copietab);
 
 }
 
@@ -1054,6 +1054,7 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
             }
         }
     }
+    recopietab(tab, copietab);
 }
 
 void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste, int tour, int valeur) //valeur 3 si c'est pour liste de coups du fou et valeur 10 reine
@@ -1302,6 +1303,7 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             recopietab(tab, copietab);
         }
     }
+    recopietab(tab, copietab);
 
 }
 
@@ -1309,18 +1311,22 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
 {
     coup *c = NULL;
     int legal;
-    if(tab[li+1][ci] == 0)
+    if(li+1 < 8)
     {
-        c = creationcoup(li, ci, li+1, ci);
-        changetabcoup(copietab, li, ci, li+1, ci, -1);
-        legal = verifechecnoir(copietab); //appel de verification echec pour noir
-        if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+        if(tab[li+1][ci] == 0)
         {
-            liste = ajoutefrere(liste, c);
+            c = creationcoup(li, ci, li+1, ci);
+            changetabcoup(copietab, li, ci, li+1, ci, -1);
+            legal = verifechecnoir(copietab); //appel de verification echec pour noir
+            if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+            {
+                liste = ajoutefrere(liste, c);
+            }
+            recopietab(tab, copietab);
         }
-        recopietab(tab, copietab);
     }
-    if(ci-1 >= 0)
+
+    if(ci-1 >= 0 && li+1 < 8)
     {
         if(tab[li+1][ci-1] > 0)
         {
@@ -1335,7 +1341,7 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
         }
     }
 
-    if(ci+1 < 8)
+    if(ci+1 < 8 && li+1 < 8)
     {
         if(tab[li+1][ci+1] > 0)
         {
@@ -1372,6 +1378,20 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
 {
     coup *c = NULL;
     int legal;
+    if(li-1 >= 0)
+    {
+        if(tab[li-1][ci]==0)
+        {
+            c = creationcoup(li, ci, li-1, ci);
+            changetabcoup(copietab, li, ci, li-1, ci, 1);
+            legal = verifechec(copietab); //appel de verification echec pour blanc
+            if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+            {
+                liste = ajoutefrere(liste, c);
+            }
+            recopietab(tab, copietab);
+        }
+    }
     if(tab[li-1][ci]==0)
     {
         c = creationcoup(li, ci, li-1, ci);
@@ -1384,7 +1404,7 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
         recopietab(tab, copietab);
     }
 
-    if(ci-1 >= 0)
+    if(ci-1 >= 0 && li-1 >= 0)
     {
         if(tab[li-1][ci-1] < 0)
         {
@@ -1399,7 +1419,7 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
         }
     }
 
-    if(ci+1 < 8)
+    if(ci+1 < 8 && li-1 >= 0)
     {
         if(tab[li-1][ci+1] < 0)
         {
@@ -1658,6 +1678,9 @@ int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
     int evaluation;
     int meilleurvaleur;
 
+    int taboriginal[8][8];
+    recopietab(tab, taboriginal);
+
     if(tour == 1) // maximisation
     {
         meilleurvaleur = INT_MIN;
@@ -1665,19 +1688,11 @@ int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
         {
             montagecoupdanstab(c, tab);
             evaluation = minimax(profondeur-1, -1, tab, alpha, beta);
-            demontagecoupdanstab(c, tab);
+            recopietab(taboriginal, tab);
 
             if(evaluation > meilleurvaleur)
             {
                 meilleurvaleur = evaluation;
-                /*if(profondeur == PRONFONDEURMAX)
-                {
-                    meilleurcoup->li = c->li;
-                    meilleurcoup->ci = c->ci;
-                    meilleurcoup->ld = c->ld;
-                    meilleurcoup->cd = c->cd;
-                }
-                */
             }
 
             alpha = plusgrand(alpha, evaluation);
@@ -1698,19 +1713,11 @@ int minimax(int profondeur, int tour, int tab[][8], int alpha, int beta)
         {
             montagecoupdanstab(c, tab);
             evaluation = minimax(profondeur-1, 1, tab, alpha, beta);
-            demontagecoupdanstab(c, tab);
+            recopietab(taboriginal, tab);
 
             if(evaluation < meilleurvaleur)
             {
                 meilleurvaleur = evaluation;
-                /*if(profondeur == PRONFONDEURMAX)
-                {
-                    meilleurcoup->li = c->li;
-                    meilleurcoup->ci = c->ci;
-                    meilleurcoup->ld = c->ld;
-                    meilleurcoup->cd = c->cd;
-                }
-                */
             }
 
             beta = pluspetit(alpha, evaluation);
@@ -1745,7 +1752,6 @@ void tourIA(int tab[][8])
         }
     }
 
-
     coup *meilleurcoup = creationcoup(0, 0, 0, 0);
     coup *liste = creationcoup(0, 0, 0, 0);
     creationlistecoup(tab, -1, liste);
@@ -1754,12 +1760,14 @@ void tourIA(int tab[][8])
 
     int resultat, meilleurresultat = INT_MAX;
 
+    int taboriginal[8][8];
+    recopietab(tab, taboriginal);
 
     while(c != NULL)
     {
         montagecoupdanstab(c, tab);
         resultat = minimax(PRONFONDEURMAX-1, 1, tab, INT_MIN, INT_MAX);
-        demontagecoupdanstab(c, tab);
+        recopietab(taboriginal, tab);
 
 
         if(resultat < meilleurresultat)
@@ -1776,16 +1784,14 @@ void tourIA(int tab[][8])
 
     liberation_rec(liste);
 
-
+    /*
     printf("\n %d", meilleurresultat);
     printf("\n Le meilleur coup est : %d, %d, %d, %d", meilleurcoup->li, meilleurcoup->ci ,meilleurcoup->ld , meilleurcoup->cd);
-
+    */
 
 
     montagecoupdanstab(meilleurcoup, tab);
 
     tourjoueur(tab);
-
-
 
 }
