@@ -114,6 +114,7 @@ int roc_ok_ou_pas(int n)
     return 0;
 }
 
+
 int roisapproche(int tab[][8], int tour, int ld, int cd) // retourne 1 si le roi est trop proche du roi adverse et 0 sinon
 {
     int roiadverse;
@@ -190,6 +191,11 @@ int roisapproche(int tab[][8], int tour, int ld, int cd) // retourne 1 si le roi
     return 0;
 }
 
+//pour que l'IA récupère le droit ou non des blancs de roc
+int retournevaleurrocblanc()
+{
+    return rocblanc;
+}
 
 int verifpionechec(int tab[][8], int n, int m)
 {
