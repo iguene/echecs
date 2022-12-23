@@ -10,6 +10,14 @@
 
 #define PRONFONDEURMAX 2
 
+#define NBTOURPOURROCRENTABLE 8
+
+int compteurtour = 0;
+
+int rocblancpossible = 1;
+
+int rocnoirpossible = 1;
+
 //IA AVEC MINIMAX (fonction minimax en avant dernier)
 
 
@@ -34,6 +42,16 @@ void changetabcoup(int tab[][8], int li, int ci, int ld, int cd, int valpiece)
     {
         tab[li][ci] = 0;
         tab[ld][cd] = -10;
+    } else if (valpiece == 19 && ld == 7 && cd == 6 && tab[ld][cd+1] == 5)
+    {
+        tab[li][ci] = 0;
+        tab[ld][cd] = 19;
+        tab[ld][cd-1] = 5;
+    } else if (valpiece == -19 && ld == 0 && cd == 6 && tab[ld][cd+1] == -5)
+    {
+        tab[li][ci] = 0;
+        tab[ld][cd] = -19;
+        tab[ld][cd-1] = -5;
     } else //cas général
     {
         tab[li][ci] = 0;
@@ -109,16 +127,26 @@ coup *ajoutefrere(coup *ainee, coup *cadet)
 
 
 
-//----------------- Pour changer un tableau selon un coup et restaurer de le tableau au coup précédent pour le minimax------------------------------
+//----------------- Pour changer un tableau selon un coup ------------------------------------------------------------------------------------------
 
 void montagecoupdanstab(coup *c, int tab[][8])
 {
     changetabcoup(tab,c->li , c->ci, c->ld, c->cd, tab[c->li][c->ci]);
 }
 
-void demontagecoupdanstab(coup *c, int tab[][8])
+
+//-------------------- Change variable général pour la permission des roc en 0 si appellé (après qu'un roi a bougé)---------------------------------
+
+
+void plusderoc(int tour)
 {
-    changetabcoup(tab, c->ld, c->cd, c->li , c->ci, tab[c->ld][c->cd]);
+    if(tour == 1)
+    {
+        rocblancpossible = 0;
+    } else
+    {
+        rocnoirpossible = 0;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -197,6 +225,33 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
     int legal;
     int ld, cd, sapproche;
 
+    if(rocnoirpossible == 1)
+    {
+        if(li == 0 && ci == 4)
+        {
+            if(tab[li][ci+1] == 0 && tab[li][ci+2] == 0 && tab[li][ci+3] == -5)
+            {
+                ld = li;
+                cd = ci+2;
+                sapproche = roisapproche(tab, 1, ld, cd);
+                if(sapproche == 1)
+                {
+                    legal = 0; // peut pas s'approcher du roi
+                } else
+                {
+                    c = creationcoup(li, ci, ld, cd);
+                    changetabcoup(copietab, li, ci, ld, cd, -19);
+                    legal = verifechecnoir(copietab);
+                    if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                    {
+                        liste = ajoutefrere(liste, c);
+                    }
+                    recopietab(tab, copietab);
+                }
+            }
+        }
+    }
+
     if(li+1 < 8)
     {
         if(tab[li+1][ci] > -1)
@@ -211,7 +266,7 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
             {
                 c = creationcoup(li, ci, ld, cd);
                 changetabcoup(copietab, li, ci, ld, cd, -19);
-                legal = verifechec(copietab);
+                legal = verifechecnoir(copietab);
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
@@ -235,7 +290,7 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
             {
                 c = creationcoup(li, ci, ld, cd);
                 changetabcoup(copietab, li, ci, ld, cd, -19);
-                legal = verifechec(copietab);
+                legal = verifechecnoir(copietab);
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
@@ -259,7 +314,7 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
             {
                 c = creationcoup(li, ci, ld, cd);
                 changetabcoup(copietab, li, ci, ld, cd, -19);
-                legal = verifechec(copietab);
+                legal = verifechecnoir(copietab);
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
@@ -283,7 +338,7 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
             {
                 c = creationcoup(li, ci, ld, cd);
                 changetabcoup(copietab, li, ci, ld, cd, -19);
-                legal = verifechec(copietab);
+                legal = verifechecnoir(copietab);
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
@@ -307,7 +362,7 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
             {
                 c = creationcoup(li, ci, ld, cd);
                 changetabcoup(copietab, li, ci, ld, cd, -19);
-                legal = verifechec(copietab);
+                legal = verifechecnoir(copietab);
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
@@ -331,7 +386,7 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
             {
                 c = creationcoup(li, ci, ld, cd);
                 changetabcoup(copietab, li, ci, ld, cd, -19);
-                legal = verifechec(copietab);
+                legal = verifechecnoir(copietab);
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
@@ -355,7 +410,7 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
             {
                 c = creationcoup(li, ci, ld, cd);
                 changetabcoup(copietab, li, ci, ld, cd, -19);
-                legal = verifechec(copietab);
+                legal = verifechecnoir(copietab);
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
@@ -380,7 +435,7 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
             {
                 c = creationcoup(li, ci, ld, cd);
                 changetabcoup(copietab, li, ci, ld, cd, -19);
-                legal = verifechec(copietab);
+                legal = verifechecnoir(copietab);
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
@@ -398,6 +453,32 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
     int legal;
     int ld, cd, sapproche;
 
+    if(rocblancpossible == 1)
+    {
+        if(li == 7 && ci == 4)
+        {
+            if(tab[li][ci+1] == 0 && tab[li][ci+2] == 0 && tab[li][ci+3] == 5)
+            {
+                ld = li;
+                cd = ci+2;
+                sapproche = roisapproche(tab, 1, ld, cd);
+                if(sapproche == 1)
+                {
+                    legal = 0; // peut pas s'approcher du roi
+                } else
+                {
+                    c = creationcoup(li, ci, ld, cd);
+                    changetabcoup(copietab, li, ci, ld, cd, 19);
+                    legal = verifechec(copietab);
+                    if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
+                    {
+                        liste = ajoutefrere(liste, c);
+                    }
+                    recopietab(tab, copietab);
+                }
+            }
+        }
+    }
 
     if(li+1 < 8)
     {
@@ -1332,7 +1413,7 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
         {
             c = creationcoup(li, ci, li+1, ci-1);
             changetabcoup(copietab, li, ci, li+1, ci-1, -1);
-            legal = verifechec(copietab);
+            legal = verifechecnoir(copietab);
             if(legal == 0)
             {
                 liste = ajoutefrere(liste, c);
@@ -1347,7 +1428,7 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
         {
             c = creationcoup(li, ci, li+1, ci+1);
             changetabcoup(copietab, li, ci, li+1, ci+1, -1);
-            legal = verifechec(copietab);
+            legal = verifechecnoir(copietab);
             if(legal == 0)
             {
                 liste = ajoutefrere(liste, c);
@@ -1362,7 +1443,7 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
         {
             c = creationcoup(li, ci, li+2, ci);
             changetabcoup(copietab, li, ci, li+2, ci, -1);
-            legal = verifechec(copietab);
+            legal = verifechecnoir(copietab);
             if(legal == 0)
             {
                 liste = ajoutefrere(liste, c);
@@ -1538,12 +1619,18 @@ int eval(int tab[][8], int tour)
     {
         for(j = 0; j < 8; j++)
         {
-            if(tab[i][j] == 4) // pour mettre la valeur des cavaliers à égal à celle des fous comme elle devrait l'être mais comment dans le tableau faut différencier...
+            if(tab[i][j] == 3) // pour mettre la valeur des fous à égal à celle des cavaliers comme elle devrait l'être mais comment dans le tableau faut différencier...
             {
-                valeur = 3;
-            } else if (tab[i][j] == -4)
+                valeur = 4;
+            } else if (tab[i][j] == -3)
             {
-                valeur = -3;
+                valeur = -4;
+            } if(tab[i][j] == 1) // c'est mieux qu'un pion vaut 2
+            {
+                valeur = 2;
+            } else if (tab[i][j] == -1)
+            {
+                valeur = -2;
             } else
             {
                 valeur = tab[i][j];
@@ -1557,69 +1644,51 @@ int eval(int tab[][8], int tour)
 
     if(tab[3][3] > 0)
     {
-        note += 3;
+        note += 5;
     } else if (tab[3][3] < 0)
     {
-        note -= 3;
+        note -= 5;
     }
 
     if(tab[3][4] > 0)
     {
-        note += 3;
+        note += 5;
     } else if (tab[3][4] < 0)
     {
-        note -= 3;
+        note -= 5;
     }
 
     if(tab[4][3] > 0)
     {
-        note += 3;
+        note += 5;
     } else if (tab[4][3] < 0)
     {
-        note -= 3;
+        note -= 5;
     }
 
     if(tab[4][4] > 0)
     {
-        note += 3;
+        note += 5;
     } else if (tab[4][4] < 0)
     {
-        note -= 3;
+        note -= 5;
     }
 
-    //Ajoute des points selon le nombre de coups possibles pour un echiquier
+    //Ajoute en devant de partie (avant que le nombre de tour dépasse nbtourpourrocrentable c'est à dire nombre de tours avant que le roc devient un paramètre négligeable) des points si roc (sous entendu)
 
-    int compteur = 0;;
-    coup *liste = NULL;
-    coup *c;
-    liste = creationcoup(0, 0, 0, 0);
-    creationlistecoup(tab, 1, liste);
-    liste = suppression_tete(liste);
-    c = liste;
-
-    while(c != NULL)
+    if(tour == 1 && compteurtour < NBTOURPOURROCRENTABLE)
     {
-        compteur++;
-        c = c->frere;
-    }
-
-    liberation_rec(liste);
-    note += compteur;
-
-    compteur = 0;
-    liste = creationcoup(0, 0, 0, 0);
-    creationlistecoup(tab, -1, liste);
-    liste = suppression_tete(liste);
-    c = liste;
-
-    while(c != NULL)
+        if(tab[7][6] == 19) //position du roi blanc en roc
+        {
+            note += 20;
+        }
+    } else if(tour == -1 && compteurtour < NBTOURPOURROCRENTABLE)
     {
-        compteur++;
-        c = c->frere;
+        if(tab[0][6] == -19) //position du roi noir en roc
+        {
+            note -= 20;
+        }
     }
-
-    liberation_rec(liste);
-    note -= compteur;
 
 
     //Donne une une très très grande note si l'adversaire est mat ou ajoute quelques points si il est simplement en echec
@@ -1748,8 +1817,14 @@ void tourIA(int tab[][8])
         ve = verifechecetmatnoir(tab);
         if (ve == 0)
         {
-            return printf("\n\n Victoire des blancs par echec et mat ! \n\n ");
+            printf("\n\n Victoire des blancs par echec et mat ! \n\n ");
+            return;
         }
+    }
+
+    if(rocblancpossible == 1)
+    {
+        rocblancpossible = retournevaleurrocblanc(); //pour que l'IA récupère le droit ou non des blancs de roc inscrite dans une variable général de arbitre.c
     }
 
     coup *meilleurcoup = creationcoup(0, 0, 0, 0);
@@ -1789,8 +1864,14 @@ void tourIA(int tab[][8])
     printf("\n Le meilleur coup est : %d, %d, %d, %d", meilleurcoup->li, meilleurcoup->ci ,meilleurcoup->ld , meilleurcoup->cd);
     */
 
+    if(tab[meilleurcoup->li][meilleurcoup->ci] == -19 && rocnoirpossible == 1) //si le noir recoit un quelconque déplacement, il perd sa possibilité de roc
+    {
+        rocnoirpossible = 0;
+    }
 
     montagecoupdanstab(meilleurcoup, tab);
+
+    compteurtour++;
 
     tourjoueur(tab);
 
