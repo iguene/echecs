@@ -8,7 +8,7 @@
 #include "echecetmatjoueur2.h"
 #include <limits.h>
 
-#define PRONFONDEURMAX 2
+#define PRONFONDEURMAX 3
 
 #define NBTOURPOURROCRENTABLE 8
 
@@ -245,6 +245,9 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
                     if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                     {
                         liste = ajoutefrere(liste, c);
+                    } else
+                    {
+                        free(c);
                     }
                     recopietab(tab, copietab);
                 }
@@ -270,6 +273,9 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -294,6 +300,9 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -318,6 +327,9 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -342,6 +354,9 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -366,6 +381,9 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -390,6 +408,9 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -414,6 +435,9 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -439,6 +463,9 @@ void listecoupsroinoir(int tab[][8], int copietab[][8], int li, int ci, coup *li
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -473,6 +500,9 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
                     if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                     {
                         liste = ajoutefrere(liste, c);
+                    }else
+                    {
+                        free(c);
                     }
                     recopietab(tab, copietab);
                 }
@@ -498,6 +528,9 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -522,6 +555,9 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -546,6 +582,9 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -570,6 +609,9 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -594,6 +636,9 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -618,6 +663,9 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -642,6 +690,9 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -667,6 +718,9 @@ void listecoupsroiblanc(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -701,6 +755,9 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
             i++;
@@ -720,6 +777,9 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -733,6 +793,9 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -761,6 +824,9 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
             i++;
@@ -780,6 +846,9 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -793,6 +862,9 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -821,6 +893,9 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
             i++;
@@ -840,6 +915,9 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -853,6 +931,9 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -881,6 +962,9 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
             i++;
@@ -901,6 +985,9 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -914,6 +1001,9 @@ void listecoupstour(int tab[][8], int copietab[][8], int li, int ci, coup *liste
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -939,6 +1029,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             } else if(tour == -1 && tab[li+2][ci+1] > -1)
@@ -949,6 +1042,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -963,6 +1059,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             } else if(tour == -1 && tab[li+2][ci-1] > -1)
@@ -973,6 +1072,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -991,6 +1093,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             } else if(tour == -1 && tab[li-2][ci+1] > -1)
@@ -1001,6 +1106,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -1015,6 +1123,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             } else if(tour == -1 && tab[li-2][ci-1] > -1)
@@ -1025,6 +1136,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -1043,6 +1157,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             } else if(tour == -1 && tab[li+1][ci+2] > -1)
@@ -1053,6 +1170,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -1067,6 +1187,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             } else if(tour == -1 && tab[li+1][ci-2] > -1)
@@ -1077,6 +1200,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -1096,6 +1222,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             } else if(tour == -1 && tab[li-1][ci+2] > -1)
@@ -1106,6 +1235,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -1120,6 +1252,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             } else if(tour == -1 && tab[li-1][ci-2] > -1)
@@ -1130,6 +1265,9 @@ void listecoupscavalier(int tab[][8], int copietab[][8], int li, int ci, coup *l
                 if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
                 {
                     liste = ajoutefrere(liste, c);
+                }else
+                {
+                    free(c);
                 }
                 recopietab(tab, copietab);
             }
@@ -1162,6 +1300,9 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
             i++;
@@ -1182,6 +1323,9 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1195,6 +1339,9 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1224,6 +1371,9 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
             i++;
@@ -1244,6 +1394,9 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1257,6 +1410,9 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1286,6 +1442,9 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
             i++;
@@ -1307,6 +1466,9 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1320,6 +1482,9 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1347,6 +1512,9 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
             i++;
@@ -1367,6 +1535,9 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1380,6 +1551,9 @@ void listecoupsfou(int tab[][8], int copietab[][8], int li, int ci, coup *liste,
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1402,6 +1576,9 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1417,6 +1594,9 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
             if(legal == 0)
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1432,6 +1612,9 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
             if(legal == 0)
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1447,6 +1630,9 @@ void listecoupspionnoir(int tab[][8], int copietab[][8], int li, int ci, coup *l
             if(legal == 0)
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1469,6 +1655,9 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
             if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1481,6 +1670,9 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
         if(legal == 0) //coup legal, provoque pas d'échec ou sort de l'échec
         {
             liste = ajoutefrere(liste, c);
+        }else
+        {
+            free(c);
         }
         recopietab(tab, copietab);
     }
@@ -1495,6 +1687,9 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
             if(legal == 0)
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1510,6 +1705,9 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
             if(legal == 0)
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1525,6 +1723,9 @@ void listecoupspionblanc(int tab[][8], int copietab[][8], int li, int ci, coup *
             if(legal == 0)
             {
                 liste = ajoutefrere(liste, c);
+            }else
+            {
+                free(c);
             }
             recopietab(tab, copietab);
         }
@@ -1625,12 +1826,6 @@ int eval(int tab[][8], int tour)
             } else if (tab[i][j] == -3)
             {
                 valeur = -4;
-            } if(tab[i][j] == 1) // c'est mieux qu'un pion vaut 2
-            {
-                valeur = 2;
-            } else if (tab[i][j] == -1)
-            {
-                valeur = -2;
             } else
             {
                 valeur = tab[i][j];
@@ -1673,6 +1868,37 @@ int eval(int tab[][8], int tour)
     {
         note -= 5;
     }
+
+    //Ajoute des points selon le nombre de coups possibles pour inciter à developper ses pièces
+
+    int nbcoupspossibles = 0;
+    coup *liste = creationcoup(0, 0, 0, 0);
+    creationlistecoup(tab, 1, liste);
+    liste = suppression_tete(liste);
+    coup *c = liste;
+
+    while(c != NULL)
+    {
+        nbcoupspossibles++;
+        c = c->frere;
+    }
+    note+= nbcoupspossibles/3;
+
+    liberation_rec(liste);
+    nbcoupspossibles = 0;
+    liste = creationcoup(0 ,0 , 0, 0);
+    creationlistecoup(tab, -1, liste);
+    liste = suppression_tete(liste);
+    c = liste;
+
+    while(c != NULL)
+    {
+        nbcoupspossibles++;
+        c = c->frere;
+    }
+    note-= nbcoupspossibles/3;
+
+
 
     //Ajoute en devant de partie (avant que le nombre de tour dépasse nbtourpourrocrentable c'est à dire nombre de tours avant que le roc devient un paramètre négligeable) des points si roc (sous entendu)
 
@@ -1868,6 +2094,7 @@ void tourIA(int tab[][8])
     {
         rocnoirpossible = 0;
     }
+
 
     montagecoupdanstab(meilleurcoup, tab);
 
